@@ -21,7 +21,7 @@ export default function Hero() {
             <div className="flex flex-row items-center gap-15 z-10 pb-2">
                 <Button className="text-[#F0EDEB] text-xl p-5.5 mt-5 bg-gray-950 border border-gray-500 hover:bg-gray-800 transition-color duration-250" variant="default">See My Projects<ArrowDown className="size-6 mt-0.5"/></Button>
                 <a className="mt-5" href="https://github.com/memento-j" target="_blank">
-                    <img className="bg-black hover:bg-gray-800 size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/logos/github-mark-white.svg"/>
+                    <img className="bg-black hover:bg-gray-800 size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
                 </a>
             </div>
             

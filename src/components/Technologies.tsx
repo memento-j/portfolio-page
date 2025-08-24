@@ -2,7 +2,7 @@ import AnimatedContent from "./AnimatedContent";
 import TechnologyCard from "./TechnologyCard";
 
 export default function TechnologiesList() {
-
+    const technologies = ["Javascript", "TypeScript", "NodeJS", "React", "MongoDB", "Python", "Git", "TailwindCSS", "Supabase"];
 
     return(
         <div className="bg-black flex flex-col items-center justify-center pb-50 pt-25">
@@ -21,7 +21,7 @@ export default function TechnologiesList() {
                         <p className="text-[#B5B3B0] text-2xl mb-15">Here are some of the technologies I am profficient with</p>
                 </AnimatedContent>  
                 <AnimatedContent
-                    distance={70}
+                    distance={100}
                     direction="vertical"
                     ease="power3.out"
                     duration={1.2}
@@ -30,8 +30,8 @@ export default function TechnologiesList() {
                     scale={1.0}
                     >
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {Array.from({length:6} ,(_, i) => (
-                        <TechnologyCard key={i}/>
+                    {technologies.map((technology, i) => (
+                        <TechnologyCard key={i} name={technology}/>
                     ))}
                     </div>
                 </AnimatedContent>   
