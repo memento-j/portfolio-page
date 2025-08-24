@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
     return(
@@ -14,9 +16,16 @@ export default function Hero() {
             {/* Radial gradient for the container to give a faded look */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_40%,black)] dark:bg-black"></div>
             <p className="relative text-center z-20 py-8 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl sm:w-150 md:w-200 w-100">
-                Hi, I'm Julian, a <span className="text-[#2c53c9]">Software Developer</span> based in northern Virginia.
+                Hi, I'm Julian, A <span className="text-[#2c53c9]">Software Developer</span> Based In Northern Virginia.
             </p>
-            <p className="text-white z-1">insetrrt github link with icon and button to go down to projects </p>
+            <div className="flex flex-row items-center gap-15 z-10 pb-2">
+                <Button className="text-[#F0EDEB] text-xl p-5.5 mt-5 bg-gray-950 border border-gray-500 hover:bg-gray-800 transition-color duration-250" variant="default">See My Projects<ArrowDown className="size-6 mt-0.5"/></Button>
+                <a className="mt-5" href="https://github.com/memento-j" target="_blank">
+                    <img className="bg-black hover:bg-gray-800 size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/logos/github-mark-white.svg"/>
+                </a>
+            </div>
+            
+
         </section>
     );
 }
