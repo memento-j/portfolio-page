@@ -2,7 +2,46 @@ import AnimatedContent from "./AnimatedContent";
 import TechnologyCard from "./TechnologyCard";
 
 export default function TechnologiesList() {
-    const technologies = ["Javascript", "TypeScript", "NodeJS", "React", "MongoDB", "Python", "Git", "TailwindCSS", "Supabase"];
+    const technologies = 
+    [
+        { 
+            name: "JavaScript",
+            description: "Web programming language"
+        }, 
+        {
+            name: "TypeScript",
+            description: "JavaScript with type safety"
+        },
+        {
+            name: "NodeJS",
+            description: "JavaScript runtime enviornment"
+        },
+        {
+            name: "React",
+            description: "JavaScript UI library"
+        },
+        {
+            name: "MongoDB",
+            description: "NoSQL database"
+        },
+        {
+            name: "Python",
+            description: "Versatile scripting language"
+        },
+        {
+            name: "Amazon Web Services",
+            description: "Cloud services provider"
+        },
+        {
+            name: "Git",
+            description: "Version Control System"
+        },
+        {
+            name: "TailwindCSS",
+            description: "CSS framework"
+        }
+
+    ]
 
     return(
         <div className="bg-black flex flex-col items-center justify-center pb-50 pt-25">
@@ -17,9 +56,10 @@ export default function TechnologiesList() {
                     scale={1.0}
                     reverse={true}
                     >
-                        <p className="text-[#F0EDEB] text-5xl font-bold mb-5">Current technologies</p> 
+                        <p className="text-[#F0EDEB] text-5xl font-bold mb-5">Technologies</p> 
                         <p className="text-[#B5B3B0] text-2xl mb-15">Here are some of the technologies I am profficient with</p>
                 </AnimatedContent>  
+                {/* List  of technologies */}
                 <AnimatedContent
                     distance={100}
                     direction="vertical"
@@ -31,7 +71,7 @@ export default function TechnologiesList() {
                     >
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {technologies.map((technology, i) => (
-                        <TechnologyCard key={i} name={technology}/>
+                        <TechnologyCard key={i} name={technology.name} description={technology.description}/>
                     ))}
                     </div>
                 </AnimatedContent>   
