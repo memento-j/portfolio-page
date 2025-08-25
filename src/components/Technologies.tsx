@@ -40,7 +40,6 @@ export default function TechnologiesList() {
             name: "TailwindCSS",
             description: "CSS framework"
         }
-
     ]
 
     return(
@@ -55,9 +54,9 @@ export default function TechnologiesList() {
                     animateOpacity
                     scale={1.0}
                     reverse={true}
-                    >
-                        <p className="text-[#F0EDEB] text-5xl font-bold mb-5">Technologies</p> 
-                        <p className="text-[#B5B3B0] text-2xl mb-15">Here are some of the technologies I am profficient with</p>
+                >
+                    <p className="text-[#F0EDEB] text-5xl font-bold mb-5">Technologies</p> 
+                    <p className="text-[#B5B3B0] text-2xl mb-15">Here are some of the technologies I am profficient with.</p>
                 </AnimatedContent>  
                 {/* List  of technologies */}
                 <AnimatedContent
@@ -68,7 +67,7 @@ export default function TechnologiesList() {
                     initialOpacity={0}
                     animateOpacity
                     scale={1.0}
-                    >
+                >
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {technologies.map((technology, i) => (
                         <TechnologyCard key={i} name={technology.name} description={technology.description}/>
