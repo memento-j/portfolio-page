@@ -4,24 +4,28 @@ import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
     return(
-        <section className="relative flex flex-col items-center justify-center min-h-screen bg-black dark pb-32">
+        <section className="relative flex flex-col items-center justify-center min-h-screen bg-zinc-950 dark pb-32">
             {/* Grid background from https://ui.aceternity.com/components/grid-and-dot-backgrounds*/}
             <div
             className={cn(
             "absolute inset-0",
-            "[background-size:35px_35px]",
+            "[background-size:32px_32px]",
             "dark:[background-image:linear-gradient(to_right,#141414_1px,transparent_1px),linear-gradient(to_bottom,#141414_1px,transparent_1px)]",
             )}
         />
             {/* Radial gradient for the container to give a faded look */}
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_40%,black)] dark:bg-black"></div>
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_40%,#09090b)] bg-zinc-950"></div>
             <p className="relative text-center z-20 py-8 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl sm:w-150 md:w-175 lg:w-250 w-100">
                 Hi, I'm Julian — <br/> a <span className="text-[#2c53c9]">Software Developer</span> based in Northern Virginia.
             </p>
             <div className="flex flex-row items-center justify-center gap-5 z-10 pb-2">
-                <Button className="text-[#F0EDEB] text-xl p-5.5 mt-5 bg-gray-950 border border-gray-500 hover:bg-gray-800 transition-color duration-250" variant="default">See My Projects<ArrowDown className="size-6 mt-0.5"/></Button>
+                <Button className="text-[#F0EDEB] text-xl p-5.5 mt-5 bg-zinc-950 border border-gray-500 hover:bg-zinc-800 transition-color duration-250" variant="default"
+                onClick={() => document.getElementById("projects")?.scrollIntoView({behavior:"smooth"})}
+                >
+                    See My Projects<ArrowDown className="size-6 mt-0.5"/>
+                </Button>
                 <a className="mt-5" href="https://github.com/memento-j" target="_blank">
-                    <img className="bg-black hover:bg-gray-800 size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
+                    <img className="bg-black hover:bg-zinc-800 size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
                 </a>
             </div>
         </section>
