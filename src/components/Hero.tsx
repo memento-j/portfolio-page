@@ -25,7 +25,7 @@ export default function Hero() {
                     See My Projects<ArrowDown className="size-6 mt-0.5"/>
                 </Button>
                 <a className="mt-5" href="https://github.com/memento-j" target="_blank">
-                    <img className="bg-black hover:bg-zinc-800 size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
+                    <img className="bg-zinc-950 hover:bg-zinc-800 size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
                 </a>
             </div>
         </section>
