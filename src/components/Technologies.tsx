@@ -44,7 +44,7 @@ export default function TechnologiesList() {
 
     return(
         <div className="bg-zinc-950 flex flex-col items-center justify-center py-25">
-            <div className="sm:w-150 md:w-180 lg:w-240 xl:w-300 w-100">
+            <div className="w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300">
                 <AnimatedContent
                     distance={150}
                     direction="horizontal"
@@ -55,8 +55,8 @@ export default function TechnologiesList() {
                     scale={1.0}
                     reverse={true}
                 >
-                    <p className="text-[#F0EDEB] text-5xl font-bold mb-5">Technologies</p> 
-                    <p className="text-[#B5B3B0] text-2xl mb-15">Here are some of the technologies I am profficient with.</p>
+                    <p className="text-[#F0EDEB] font-bold mb-5 text-3xl sm:text-5xl">Technologies</p> 
+                    <p className="text-[#B5B3B0] mb-15 text-xl sm:text-2xl">Here are some of the technologies I am profficient with.</p>
                 </AnimatedContent>  
                 {/* List  of technologies */}
                 <AnimatedContent
