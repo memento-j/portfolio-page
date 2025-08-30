@@ -17,7 +17,7 @@ export default function ProjectsList() {
     ]
 
     return(
-        <div className="bg-zinc-950 flex flex-col items-center justify-center pb-50 pt-5">
+        <div className="bg-zinc-950 flex flex-col items-center justify-center pb-50 pt-40" id="projects">
             <div className="w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300">
                 <AnimatedContent
                     distance={150}
@@ -29,7 +29,7 @@ export default function ProjectsList() {
                     scale={1.0}
                     reverse={true}
                 >
-                    <p className="text-[#F0EDEB] sm:text-5xl text-3xl font-bold mb-12">Projects</p>
+                    <p className="text-[#F0EDEB] sm:text-5xl text-3xl font-bold mb-16">Projects</p>
                 </AnimatedContent>
                 <AnimatedContent
                     distance={100}
@@ -40,7 +40,7 @@ export default function ProjectsList() {
                     animateOpacity
                     scale={1.0}
                 >
-                    <div id="projects">
+                    <div>
                         {projects.map((project, i) => (
                             <ProjectCard key={i} name={project.name} description={project.description} technologies={project.technoligies}/>
                         ))}

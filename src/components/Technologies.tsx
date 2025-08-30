@@ -43,7 +43,7 @@ export default function TechnologiesList() {
     ]
 
     return(
-        <div className="bg-zinc-950 flex flex-col items-center justify-center py-25">
+        <div className="bg-zinc-950 flex flex-col items-center justify-center pb-20 pt-40" id="skills">
             <div className="w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300">
                 <AnimatedContent
                     distance={150}

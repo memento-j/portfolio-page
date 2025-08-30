@@ -4,7 +4,7 @@ import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
     return(
-        <section className="relative flex flex-col items-center justify-center min-h-screen bg-zinc-950 dark pb-32">
+        <section className="relative flex flex-col items-center justify-center min-h-screen bg-zinc-950 dark pb-32" id="home">
             {/* Grid background from https://ui.aceternity.com/components/grid-and-dot-backgrounds*/}
             <div
             className={cn(
@@ -19,7 +19,7 @@ export default function Hero() {
                 Hi, I'm Julian. <br/> A <span className="text-[#2c53c9]">Software Developer</span> based in Northern Virginia.
             </p>
             <div className="flex flex-row items-center justify-center gap-5 z-10 pb-2 w-70 sm:w-100">
-                <Button className="text-[#F0EDEB] text-xl p-5.5 mt-5 bg-zinc-950 border border-gray-500 hover:bg-zinc-800 hover:scale-103 transition-color duration-250" variant="default"
+                <Button className="text-[#F0EDEB] text-xl p-5.5 mt-5 bg-zinc-950 border border-gray-500 hover:bg-zinc-900 hover:scale-103 transition-color duration-200" variant="default"
                 onClick={() => document.getElementById("projects")?.scrollIntoView({behavior:"smooth"})}
                 >
                     See My Projects<ArrowDown className="size-6 mt-0.5"/>
