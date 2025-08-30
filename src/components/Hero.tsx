@@ -28,12 +28,12 @@ export default function Hero() {
                     reverse={true}
             >
                 <FadeContent blur={true} duration={500} delay={100} easing="ease-out" initialOpacity={0}>
-                    <p className="relative text-center z-20 py-8 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl w-75 sm:w-150 md:w-175 lg:w-250">
+                    <p className="relative text-center z-20 py-8 mt-14 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl w-75 sm:w-150 md:w-175 lg:w-250">
                         Hi, I'm Julian. <br/> A <span className="text-[#2c53c9]">Software Developer</span> based in Northern Virginia.
                     </p>
                 </FadeContent>
             </AnimatedContent>
-            <p className="text-[#B5B3B0] fond-bold text-2xl z-20 mb-7">
+            <p className="text-[#B5B3B0] fond-bold z-20 mb-7 w-75 text-lg sm:text-2xl sm:w-150 md:w-175 lg:w-250 text-center">
                 I embrace challenges as opportunities to learn.
             </p>
             <div className="flex flex-row items-center justify-center gap-5 z-10 pb-2 w-70 sm:w-100">
