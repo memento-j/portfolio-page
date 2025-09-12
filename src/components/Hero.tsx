@@ -33,17 +33,20 @@ export default function Hero() {
                     </p>
                 </FadeContent>
             </AnimatedContent>
-            <p className="text-[#B5B3B0] fond-bold z-20 mb-7 w-75 text-lg sm:text-2xl sm:w-150 md:w-175 lg:w-250 text-center">
-                I embrace challenges as opportunities to learn.
+            <p className="text-[#B5B3B0] fond-bold z-20 mb-8 w-75 text-lg sm:text-2xl sm:w-150 md:w-175 lg:w-250 text-center">
+                I embrace challenges as opportunities for growth and discovery.
             </p>
-            <div className="flex flex-row items-center justify-center gap-5 z-10 pb-2 w-70 sm:w-100">
-                <Button className="text-[#F0EDEB] custom-class text-xl p-5.5 mt-5 bg-zinc-950 border border-gray-500 hover:bg-zinc-800 hover:scale-103 transition-color duration-200" variant="default"
+            <div className="flex flex-row items-center justify-center z-10 pb-2 w-70 sm:w-100 md:w-150">
+                <Button className="text-[#F0EDEB] p-5.5 mt-5 mr-2 bg-zinc-950 border border-gray-500 hover:bg-zinc-800 text-[16px] sm:text-xl sm:mr-10 hover:scale-103 transition-color duration-200" variant="default"
                 onClick={() => document.getElementById("projects")?.scrollIntoView({behavior:"smooth"})}
                 >
                     See My Projects<ArrowDown className="size-4.5 mt-0.5"/>
                 </Button>
                 <a className="mt-5" href="https://github.com/memento-j" target="_blank">
-                    <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 [@media(min-width:320px)]:size-15 sm:size-18 rounded-xl p-3 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
+                    <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 size-14.5 sm:size-16.5 rounded-xl p-0.5 mr-2 transition-colors duration-250" src="/icons/linkedin.svg"/>
+                </a>
+                <a className="mt-5" href="https://github.com/memento-j" target="_blank">
+                    <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 size-12 sm:size-14 rounded-xl p-1.5 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
                 </a>
             </div>
         </section>
