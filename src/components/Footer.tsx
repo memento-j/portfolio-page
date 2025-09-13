@@ -14,7 +14,7 @@ export default function Footer() {
             <a href="https://github.com/memento-j" target="_blank">
                 <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 size-8 sm:size-10 rounded-xl p-0.5 mr-2 transition-colors duration-250" src="/icons/linkedin.svg"/>
             </a>
-            <a href="https://github.com/memento-j" target="_blank">
+            <a href="https://github.com/memento-j/portfolio-page" target="_blank">
                 <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 size-8 sm:size-10 rounded-xl p-1.5 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
             </a>
           </div>

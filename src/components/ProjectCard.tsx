@@ -10,7 +10,7 @@ export default function ProjectCard({name, description, technologies}: ProjectCa
     return(
         <div className="pt-3 sm:px-9 px-3 bg-zinc-900 rounded-xl w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300 h-auto mt-8">
             <p className="text-[#F0EDEB] text-2xl sm:text-4xl mt-5 mb-8 font-[500]">{name}</p>
-            <p className="text-[#B5B3B0] text-lg sm:text-2xl mb-3 pb-5">{description}</p>
+            <p className="text-[#B5B3B0] sm:text-2xl mb-3 pb-5">{description}</p>
             <div className="flex flex-col">
                 <img className="rounded-lg" src={`/projects/${name.toLowerCase()}.png`} />
                 <div className="flex justify-between mt-5">
