@@ -7,11 +7,13 @@ export default function ProjectsList() {
         {
             name: "Music Playlist Transferrer",
             description: "Cross-platform music tool that lets users migrate their playlists effortlessly between streaming services (starting with YouTube and Spotify).",
+            link: "https://github.com/memento-j/melodex",
             technoligies: ["OAuth 2.0", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
         },
                 {
             name: "AI Interview Practice Tool",
             description: "An AI-powered web app that helps users practice, refine, and build confidence for job interviews.",
+            link: "https://github.com/memento-j/interview-trainer",
             technoligies: ["Supabase", "CRUD", "AssemblyAI", "OpenAI", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
         },
     ]
@@ -42,7 +44,7 @@ export default function ProjectsList() {
                 >
                     <div>
                         {projects.map((project, i) => (
-                            <ProjectCard key={i} name={project.name} description={project.description} technologies={project.technoligies}/>
+                            <ProjectCard key={i} name={project.name} description={project.description} link={project.link} technologies={project.technoligies}/>
                         ))}
                     </div>
                 </AnimatedContent>  

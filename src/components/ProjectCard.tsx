@@ -3,10 +3,11 @@ import { Button } from "./ui/button";
 interface ProjectCardProps {
     name: string
     description: string
+    link: string
     technologies: string[]
 }
 
-export default function ProjectCard({name, description, technologies}: ProjectCardProps) {
+export default function ProjectCard({name, description, technologies, link}: ProjectCardProps) {
     return(
         <div className="pt-3 sm:px-9 px-3 bg-zinc-900 rounded-xl w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300 h-auto mt-8">
             <p className="text-[#F0EDEB] text-2xl sm:text-4xl mt-5 mb-8 font-[500]">{name}</p>
@@ -21,7 +22,7 @@ export default function ProjectCard({name, description, technologies}: ProjectCa
                             </Button>
                         )) }
                     </div>
-                    <a href="https://github.com/memento-j/melodex" target="_blank">
+                    <a href={link} target="_blank">
                         <img className="hover:bg-zinc-800 size-14 sm:size-18 rounded-xl p-3 mr-1 sm:mt-10 md:mt-4 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
                     </a>
                 </div>
