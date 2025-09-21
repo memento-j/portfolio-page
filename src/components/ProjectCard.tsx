@@ -13,7 +13,7 @@ export default function ProjectCard({name, description, technologies, link}: Pro
             <p className="text-[#F0EDEB] text-2xl sm:text-4xl mt-5 mb-8 font-[500]">{name}</p>
             <p className="text-[#B5B3B0] sm:text-2xl mb-3 pb-5">{description}</p>
             <div className="flex flex-col">
-                <div className="overflow-hidden rounded-xl">
+                <div className="overflow-hidden rounded-xl border border-zinc-700 shadow-2xl">
                     <img className="transition-transform duration-400 hover:scale-105" src={`/projects/${name.toLowerCase()}.png`} />
                 </div>
                 <div className="flex justify-between mt-5">
