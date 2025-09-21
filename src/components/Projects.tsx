@@ -5,17 +5,17 @@ export default function ProjectsList() {
     const projects = 
     [
         {
-            name: "Music Playlist Transferrer",
-            description: "Cross-platform music tool that lets users migrate their playlists effortlessly between streaming services (starting with YouTube and Spotify).",
-            link: "https://github.com/memento-j/melodex",
-            technoligies: ["OAuth 2.0", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
-        },
-                {
             name: "AI Interview Practice Tool",
             description: "An AI-powered web app that helps users practice, refine, and build confidence for job interviews.",
             link: "https://github.com/memento-j/interview-trainer",
             technoligies: ["Supabase", "CRUD", "AssemblyAI", "OpenAI", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
         },
+        {
+            name: "Music Playlist Transferrer",
+            description: "Cross-platform music tool that lets users migrate their playlists effortlessly between streaming services (starting with YouTube and Spotify).",
+            link: "https://github.com/memento-j/melodex",
+            technoligies: ["OAuth 2.0", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
+        }
     ]
 
     return(
