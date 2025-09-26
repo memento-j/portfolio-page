@@ -37,16 +37,16 @@ export default function Hero() {
                 I embrace challenges as opportunities for growth and discovery.
             </p>
             <div className="flex flex-row items-center justify-center z-10 pb-2 w-70 sm:w-100 md:w-150">
-                <Button className="text-[#F0EDEB] p-5.5 mt-5 mr-2 bg-[#2c53c9] border border-zinc-700 hover:bg-[#17389c] text-[16px] sm:text-xl sm:mr-10 hover:scale-103 transition-color duration-200" variant="default"
+                <Button className="text-[#F0EDEB] p-5.5 mt-5 mr-2 bg-[#2c53c9] border border-zinc-700 hover:bg-[#17389c] text-[16px] sm:text-xl sm:mr-10 hover:scale-107 transition-color duration-200" variant="default"
                 onClick={() => document.getElementById("projects")?.scrollIntoView({behavior:"smooth"})}
                 >
                     See My Projects<ArrowDown className="size-4.5 mt-0.5"/>
                 </Button>
                 <a className="mt-5" href="https://github.com/memento-j" target="_blank">
-                    <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 size-14.5 sm:size-16.5 rounded-xl p-0.5 mr-2 transition-colors duration-250" src="/icons/linkedin.svg"/>
+                    <img className="bg-zinc-950 hover:scale-107 size-14.5 sm:size-16.5 rounded-xl p-0.5 mr-2 transition duration-200" src="/icons/linkedin.svg"/>
                 </a>
                 <a className="mt-5" href="https://github.com/memento-j" target="_blank">
-                    <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 size-12 sm:size-14 rounded-xl p-1.5 mr-1 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
+                    <img className="bg-zinc-950 hover:scale-107 size-12 sm:size-14 rounded-xl p-1.5 mr-1 transition duration-200" src="/icons/github-mark-white.svg"/>
                 </a>
             </div>
         </section>
