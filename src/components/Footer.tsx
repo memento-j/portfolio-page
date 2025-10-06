@@ -11,7 +11,7 @@ export default function Footer() {
           </p>
           {/* Socials links */}
           <div className="flex flex-row gap-5">
-            <a href="https://github.com/memento-j" target="_blank">
+            <a href="https://www.linkedin.com/in/julian-sales-880647202/" target="_blank">
                 <img className="bg-zinc-950 hover:bg-zinc-800 hover:scale-105 size-8 sm:size-10 rounded-xl p-0.5 mr-2 transition-colors duration-250" src="/icons/linkedin.svg"/>
             </a>
             <a href="https://github.com/memento-j/portfolio-page" target="_blank">

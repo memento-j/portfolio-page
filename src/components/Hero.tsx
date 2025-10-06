@@ -42,7 +42,7 @@ export default function Hero() {
                 >
                     See My Projects<ArrowDown className="size-4.5 mt-0.5"/>
                 </Button>
-                <a className="mt-5" href="https://github.com/memento-j" target="_blank">
+                <a className="mt-5" href="https://www.linkedin.com/in/julian-sales-880647202/" target="_blank">
                     <img className="bg-zinc-950 hover:scale-107 size-14.5 sm:size-16.5 rounded-xl p-0.5 mr-2 transition duration-200" src="/icons/linkedin.svg"/>
                 </a>
                 <a className="mt-5" href="https://github.com/memento-j" target="_blank">
