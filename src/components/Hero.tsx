@@ -37,7 +37,7 @@ export default function Hero() {
                 I embrace challenges as opportunities for growth and discovery.
             </p>
             <div className="flex flex-row items-center justify-center z-10 pb-2 w-70 sm:w-100 md:w-150">
-                <Button className="text-[#F0EDEB] p-5.5 mt-5 mr-2 bg-[#2c53c9] border border-zinc-700 hover:bg-[#17389c] text-[16px] sm:text-xl sm:mr-10 hover:scale-107 transition-color duration-200" variant="default"
+                <Button className="text-[#F0EDEB] p-5.5 mt-5 mr-2 bg-[#2c53c9] border border-zinc-700 hover:bg-[#17389c] text-[16px] sm:text-xl sm:mr-10 hover:cursor-pointer hover:scale-107 transition-color duration-200" variant="default"
                 onClick={() => document.getElementById("projects")?.scrollIntoView({behavior:"smooth"})}
                 >
                     See My Projects<ArrowDown className="size-4.5 mt-0.5"/>
