@@ -14,7 +14,7 @@ export default function ProjectCard({name, description, technologies, link}: Pro
             <p className="text-[#B5B3B0] sm:text-2xl mb-3 pb-5">{description}</p>
             <div className="flex flex-col">
                 <div className="overflow-hidden rounded-xl border border-zinc-700 shadow-2xl">
-                    <img className="transition-transform duration-400 hover:scale-105" src={`/projects/${name.toLowerCase()}.png`} />
+                    <img loading="lazy" className="transition-transform duration-400 hover:scale-105" src={`/projects/${name.toLowerCase()}.png`} />
                 </div>
                 <div className="flex justify-between mt-5">
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 pb-8">
@@ -25,7 +25,7 @@ export default function ProjectCard({name, description, technologies, link}: Pro
                         )) }
                     </div>
                     <a href={link} target="_blank">
-                        <img className="hover:bg-zinc-800 size-14 sm:size-18 rounded-xl p-3 mr-1 sm:mt-10 md:mt-4 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
+                        <img loading="lazy" className="hover:bg-zinc-800 size-14 sm:size-18 rounded-xl p-3 mr-1 sm:mt-10 md:mt-4 transition-colors duration-250" src="/icons/github-mark-white.svg"/>
                     </a>
                 </div>
             </div>
