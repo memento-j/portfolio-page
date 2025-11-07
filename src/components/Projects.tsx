@@ -6,13 +6,13 @@ export default function ProjectsList() {
     [
         {
             name: "AI Interview Practice Tool",
-            description: "An AI-powered web app that helps users practice, refine, and build confidence for job interviews.",
+            description: "Developed an AI-driven interview preparation platform that enables users to practice mock interviews, receive intelligent feedback on their responses, and track their improvement over time.",
             link: "https://github.com/memento-j/interview-trainer",
             technoligies: ["Supabase", "CRUD", "Docker", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
         },
         {
             name: "Music Playlist Transferrer",
-            description: "Cross-platform music tool that lets users migrate their playlists effortlessly between streaming services (starting with YouTube and Spotify).",
+            description: "A cross-platform music tool that lets users effortlessly migrate their playlists between streaming services, starting with YouTube and Spotify.",
             link: "https://github.com/memento-j/melodex",
             technoligies: ["OAuth 2.0", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
         }
