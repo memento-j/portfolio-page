@@ -1,16 +1,25 @@
 import { Button } from "./ui/button";
+import { ArrowRight } from "lucide-react";
 
 interface ProjectCardProps {
     name: string
     description: string
     link: string
+    live: string
     technologies: string[]
 }
 
-export default function ProjectCard({name, description, technologies, link}: ProjectCardProps) {
+export default function ProjectCard({name, description, technologies, link, live}: ProjectCardProps) {
     return(
         <div className="pt-3 sm:px-9 px-3 bg-zinc-900 rounded-xl w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300 h-auto mt-8">
-            <p className="text-[#F0EDEB] text-2xl sm:text-4xl mt-5 mb-8 font-[500]">{name}</p>
+            <div className="flex justify-between">
+                <p className="text-[#F0EDEB] text-2xl sm:text-4xl mt-5 mb-8 font-[500]">{name}</p> 
+                {live && (
+                    <a href={live} target="_blank" rel="noopener noreferrer" className="mt-8 md:mt-5">
+                        <Button className="bg-[#2c53c9] sm:text-lg  md:text-xl text-[#F0EDEB] border border-zinc-700 hover:bg-[#17389c] hover:cursor-pointer hover:scale-107 transition-color duration-200">Live Demo <ArrowRight className="mt-0.5"/></Button>
+                    </a>
+                )}
+            </div>
             <p className="text-[#B5B3B0] sm:text-2xl mb-3 pb-5">{description}</p>
             <div className="flex flex-col">
                 <div className="overflow-hidden rounded-xl border border-zinc-700 shadow-2xl">

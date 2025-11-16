@@ -6,12 +6,14 @@ export default function ProjectsList() {
     [
         {
             name: "AI Interview Practice Tool",
+            live: "https://practimateai.com",
             description: "Developed an AI-driven interview preparation platform that enables users to practice mock interviews, receive intelligent feedback on their responses, and track their improvement over time.",
             link: "https://github.com/memento-j/interview-trainer",
             technoligies: ["Supabase", "CRUD", "Docker", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
         },
         {
             name: "Music Playlist Transferrer",
+            live: "",
             description: "A cross-platform music tool that lets users effortlessly migrate their playlists between streaming services, starting with YouTube and Spotify.",
             link: "https://github.com/memento-j/melodex",
             technoligies: ["OAuth 2.0", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
@@ -36,7 +38,7 @@ export default function ProjectsList() {
                         transition={{ delay: 0.10, type: "spring", duration: 1.2 }}
                         viewport={{ once: true, amount: 0.1 }}
                     >
-                        <ProjectCard key={i} name={project.name} description={project.description} link={project.link} technologies={project.technoligies}/>
+                        <ProjectCard key={i} name={project.name} live={project.live} description={project.description} link={project.link} technologies={project.technoligies}/>
                     </motion.div>
                 ))}
             </div>
