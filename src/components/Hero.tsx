@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { ArrowDown } from "lucide-react";
 import FadeContent from "./FadeContent";
 import { motion } from "framer-motion";
+import { BorderBeam } from "./ui/border-beam";
 
 export default function Hero() {
     return(
@@ -37,10 +38,12 @@ export default function Hero() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.10, type: "spring" }}
                 >
-                    <Button className="text-[#F0EDEB] p-5.5 mt-5 mr-2 bg-[#2c53c9] border border-zinc-700 hover:bg-[#17389c] text-[16px] sm:text-xl sm:mr-10 hover:cursor-pointer hover:scale-107 transition-color duration-200" variant="default"
+                    <Button className="relative text-[#F0EDEB] rounded-3xl p-5.5 px-10 mt-5 mr-2 bg-[#2c53c9] hover:bg-[#17389c] text-[16px] sm:text-xl sm:mr-10 hover:cursor-pointer hover:scale-107 transition-color duration-200" variant="default"
                     onClick={() => document.getElementById("projects")?.scrollIntoView({behavior:"smooth"})}
                     >
+                        
                         See My Projects<ArrowDown className="size-4.5 mt-0.5"/>
+                        <BorderBeam size={30} duration={4} borderWidth={2} className="from-white/40 via-white/60 to-transparent"/>
                     </Button>
                 </motion.div>
                 <motion.div
