@@ -13,32 +13,36 @@ export default function TechnologiesList() {
             description: "JavaScript with type safety"
         },
         {
-            name: "NodeJS",
-            description: "JavaScript runtime enviornment"
+            name: "Python",
+            description: "Versatile scripting language"
         },
         {
-            name: "React",
-            description: "JavaScript UI library"
+            name: "Java",
+            description: "General-purpose language"
         },
         {
             name: "MongoDB",
             description: "NoSQL database"
         },
         {
-            name: "Git",
-            description: "Version Control System"
+            name: "PostgreSQL",
+            description: "SQL database"
         },
         {
             name: "TailwindCSS",
             description: "CSS framework"
         },
         {
-            name: "Supabase",
-            description: "PostgreSQL-based BaaS"
+            name: "React",
+            description: "JavaScript UI library"
         },
         {
-            name: "Python",
-            description: "Versatile scripting language"
+            name: "Git",
+            description: "Version Control System"
+        },
+        {
+            name: "NodeJS",
+            description: "JavaScript runtime enviornment"
         },
         {
             name: "Docker",
@@ -47,12 +51,7 @@ export default function TechnologiesList() {
         {
             name: "Amazon Web Services",
             description: "Cloud services provider"
-        },
-        {
-            name: "Selenium",
-            description: "Browser automation framework"
         }
-
     ]
 
     return(
