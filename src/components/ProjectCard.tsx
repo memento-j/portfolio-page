@@ -13,7 +13,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ name, description, technologies, link, live, tagline }: ProjectCardProps) {
     return (
-        <div className="sm:px-9 px-5 pt-6 pb-8 bg-zinc-900 rounded-xl w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300 border border-zinc-800 hover:border-zinc-700 mt-8 transition duration-300">
+        <div className="sm:px-9 px-5 pt-6 pb-8 bg-zinc-900 rounded-xl w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300 border border-zinc-800 hover:border-[#2c53c9]/40  mt-8 transition duration-300">
 
             {/* Header row — title + actions */}
             <div className="flex items-start justify-between gap-4 mb-4">
