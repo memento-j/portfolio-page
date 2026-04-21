@@ -1,67 +1,13 @@
-import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { ArrowDown, Github, Linkedin } from "lucide-react";
 import FadeContent from "./FadeContent";
 import { motion } from "framer-motion";
 import { BorderBeam } from "./ui/border-beam";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import Beams from "./Beams";
 
 export default function Hero() {
     const sectionRef = useRef<HTMLElement>(null);
-    const spotlightRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const section = sectionRef.current;
-        const spotlight = spotlightRef.current;
-        if (!section || !spotlight) return;
-
-        let rafId: number;
-        let targetX = 0;
-        let targetY = 0;
-        let currentX = 0;
-        let currentY = 0;
-        let hasMoved = false;
-
-        const handleMouseMove = (e: MouseEvent) => {
-            const rect = section.getBoundingClientRect();
-            targetX = e.clientX - rect.left;
-            targetY = e.clientY - rect.top;
-            if (!hasMoved) {
-                currentX = targetX;
-                currentY = targetY;
-                hasMoved = true;
-                spotlight.style.opacity = "1";
-            }
-        };
-
-        const handleMouseLeave = () => {
-            spotlight.style.opacity = "0";
-        };
-
-        const handleMouseEnter = () => {
-            if (hasMoved) spotlight.style.opacity = "1";
-        };
-
-        // Smooth lerp so the spotlight trails the cursor gently
-        const animate = () => {
-            currentX += (targetX - currentX) * 0.12;
-            currentY += (targetY - currentY) * 0.12;
-            spotlight.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
-            rafId = requestAnimationFrame(animate);
-        };
-
-        section.addEventListener("mousemove", handleMouseMove);
-        section.addEventListener("mouseleave", handleMouseLeave);
-        section.addEventListener("mouseenter", handleMouseEnter);
-        rafId = requestAnimationFrame(animate);
-
-        return () => {
-            section.removeEventListener("mousemove", handleMouseMove);
-            section.removeEventListener("mouseleave", handleMouseLeave);
-            section.removeEventListener("mouseenter", handleMouseEnter);
-            cancelAnimationFrame(rafId);
-        };
-    }, []);
 
     return(
         <section
@@ -69,37 +15,26 @@ export default function Hero() {
             className="relative flex flex-col items-center justify-center min-h-screen bg-zinc-950 dark pb-32 overflow-hidden"
             id="home"
         >
-            {/* Grid background */}
-            <div
-                aria-hidden
-                className={cn(
-                    "absolute inset-0",
-                    "[background-size:32px_32px]",
-                    "dark:[background-image:linear-gradient(to_right,#141414_1px,transparent_1px),linear-gradient(to_bottom,#141414_1px,transparent_1px)]",
-                )}
-            />
-
-            {/* Cursor-following spotlight — lives above the grid, below the vignette */}
-            <div
-                ref={spotlightRef}
-                aria-hidden
-                className="pointer-events-none absolute top-0 left-0 w-[600px] h-[600px] opacity-0 transition-opacity duration-500"
-                style={{
-                    background: "radial-gradient(circle, rgba(44,83,201,0.18) 0%, rgba(44,83,201,0.08) 30%, transparent 65%)",
-                    willChange: "transform",
-                }}
-            />
-
-            {/* Radial vignette — fades grid edges */}
-            <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,transparent_40%,#09090b)] bg-zinc-950" />
+            <div className="absolute inset-0 z-0">
+                <Beams
+                    beamWidth={3}
+                    beamHeight={25}
+                    beamNumber={50}
+                    lightColor="#848a93"
+                    speed={2}
+                    noiseIntensity={1}
+                    scale={0.2}
+                    rotation={30}
+                />
+            </div>
 
             {/* ——— Content ——— */}
 
             {/* Terminal-path tag */}
             <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                initial={{ opacity: 0, x: 150 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ type: "spring", duration: 1.2 }}
                 className="relative z-20 mt-20 mb-4 flex items-center gap-2 font-mono text-xs sm:text-sm text-zinc-500 tracking-tight"
             >
                 <span className="text-[#2c53c9]">~/</span>
