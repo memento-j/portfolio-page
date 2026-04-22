@@ -5,7 +5,7 @@ export default function ProjectsList() {
     const projects = [
         {
             name: "AI Interview Practice Tool",
-            tagline: "full-stack · ai platform",
+            tagline: "full-stack web app",
             live: "https://practimateai.com",
             description: "Developed an AI-driven interview preparation platform that enables users to practice mock interviews, receive intelligent feedback on their responses, and track their improvement over time.",
             link: "https://github.com/memento-j/interview-trainer",
@@ -13,7 +13,7 @@ export default function ProjectsList() {
         },
         {
             name: "Music Playlist Transferrer",
-            tagline: "web app · cross-platform",
+            tagline: "full-stack web app",
             live: "",
             description: "A cross-platform music tool that lets users effortlessly migrate their playlists between streaming services, starting with YouTube and Spotify.",
             link: "https://github.com/memento-j/melodex",

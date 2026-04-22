@@ -28,8 +28,6 @@ export default function Hero() {
                 />
             </div>
 
-            {/* ——— Content ——— */}
-
             {/* Terminal-path tag */}
             <motion.div
                 initial={{ opacity: 0, x: 150 }}
