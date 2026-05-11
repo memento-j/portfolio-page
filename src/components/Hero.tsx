@@ -58,8 +58,8 @@ export default function Hero() {
                 transition={{ type: "spring", duration: 1.2 }}
             >
                 <FadeContent blur={true} duration={500} delay={100} easing="ease-out" initialOpacity={0}>
-                    <p className="relative text-center z-20 py-6 mb-2 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl w-75 sm:w-150 md:w-175 lg:w-250">
-                        Hi, I'm Julian. <br/> A <span className="text-[#2c53c9]">Software Developer</span> based in Northern Virginia.
+                    <p className="relative text-center z-20 py-6 mb-2 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl w-75 sm:w-150 md:w-175 xl:w-300">
+                        Hi, I'm Julian. <br/> A <span className="text-[#2c53c9]">Full-Stack Software Developer</span> based in Northern Virginia.
                     </p>
                 </FadeContent>
             </motion.div>

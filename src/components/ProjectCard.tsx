@@ -8,7 +8,7 @@ interface ProjectCardProps {
     link: string
     live: string
     technologies: string[]
-    tagline?: string  // e.g. "full-stack · ai platform"
+    tagline?: string
 }
 
 export default function ProjectCard({ name, description, technologies, link, live, tagline }: ProjectCardProps) {
