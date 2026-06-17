@@ -29,11 +29,11 @@ export default function ProjectsList() {
         >
             <div className="relative z-10 w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300">
                 <motion.div
-                    initial={{ opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    className="flex items-end justify-between gap-4 pb-5"
+                    initial={{ opacity: 0, x: -100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 , type: "spring", duration: 1.2 }}
+                    viewport={{ once: true, amount: 0.1 }}
+
                 >
                     <div>
                         <p className="text-[#F0EDEB] sm:text-5xl text-3xl font-bold">Projects</p>

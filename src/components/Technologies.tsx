@@ -65,7 +65,7 @@ export default function TechnologiesList() {
 
                 >
                     <p className="text-[#F0EDEB] font-bold text-3xl sm:text-5xl">Technologies</p> 
-                        <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mt-3 mb-12">Here are some of the technologies I am profficient with</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mt-3 mb-12">Here are some of the technologies I am profficient with</p>
                 </motion.div>  
                 {/* List  of technologies */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
