@@ -3,6 +3,7 @@ import TechnologiesList from "./components/Technologies";
 import ProjectsList from "./components/Projects";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+// import Images from "./components/Images";
 
 export default function HomePage() {
 
@@ -11,7 +12,8 @@ export default function HomePage() {
       <NavBar/>
       <Hero/>
       <TechnologiesList/>
-      <ProjectsList/>  
+      <ProjectsList/> 
+      {/* <Images/>  */}
       <Footer/>
     </>
   )

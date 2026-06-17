@@ -2,7 +2,6 @@ import { Button } from "./ui/button";
 import { ArrowDown, Github, Linkedin } from "lucide-react";
 import FadeContent from "./FadeContent";
 import { motion } from "framer-motion";
-import { BorderBeam } from "./ui/border-beam";
 import { useRef } from "react";
 import Beams from "./Beams";
 
@@ -27,20 +26,6 @@ export default function Hero() {
                     rotation={30}
                 />
             </div>
-
-            {/* Terminal-path tag */}
-            <motion.div
-                initial={{ opacity: 0, x: 150 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ type: "spring", duration: 1.2 }}
-                className="relative z-20 mt-20 mb-4 flex items-center gap-2 font-mono text-xs sm:text-sm text-zinc-500 tracking-tight"
-            >
-                <span className="text-[#2c53c9]">~/</span>
-                <span>portfolio</span>
-                <span className="text-zinc-700">—</span>
-                <span className="text-zinc-400">julian.dev</span>
-                <span className="inline-block w-[7px] h-3.5 bg-[#2c53c9] hero-cursor ml-0.5" />
-            </motion.div>
 
             <style>{`
                 @keyframes hero-cursor-blink {
@@ -72,8 +57,7 @@ export default function Hero() {
                 className="relative z-20 mb-8 w-75 sm:w-150 md:w-175 lg:w-250 text-center"
             >
                 <p className="text-[#B5B3B0] text-lg sm:text-xl">
-                    <span className="font-mono text-[#2c53c9]/80 mr-2">{`>`}</span>
-                    Building solutions to real problems I encounter and see around me
+                    I enjoy building solutions to real problems I encounter and see around me
                 </p>
             </motion.div>
 
@@ -88,7 +72,6 @@ export default function Hero() {
                     >
 
                         See My Projects<ArrowDown className="size-4.5 mt-0.5"/>
-                        <BorderBeam size={30} duration={4} borderWidth={2} className="from-white/40 via-white/60 to-transparent"/>
                     </Button>
                 </motion.div>
                 <motion.div

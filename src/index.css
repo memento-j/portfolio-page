@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
+
+:root { 
+  font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif; 
+}
+.font-mono, code, pre { 
+  font-family: 'JetBrains Mono', ui-monospace, monospace; 
+}
 
 @custom-variant dark (&:is(.dark *));
 
