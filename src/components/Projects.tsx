@@ -9,7 +9,7 @@ export default function ProjectsList() {
             live: "https://practimateai.com",
             description: "Developed an AI-driven interview preparation platform that enables users to practice mock interviews, receive intelligent feedback on their responses, and track their improvement over time.",
             link: "https://github.com/memento-j/interview-trainer",
-            technologies: ["Supabase", "CRUD", "Docker", "ExpressJS", "React", "JavaScript", "TypeScript", "shadcn/ui", "TailwindCSS"]
+            technologies: ["Supabase", "CRUD", "Docker", "ExpressJS", "React", "TypeScript", "shadcn/ui", "TailwindCSS", "AWS Deployment"]
         },
         {
             name: "Music Playlist Transferrer",
