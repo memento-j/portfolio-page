@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function NavBar() {
-    const [showNav, setShowNav] = useState(true);
-    const [scrollY, setScrollY] = useState(0);
+    const [progress, setProgress] = useState(0);
     const [activeSection, setActiveSection] = useState("home");
 
     const sections = [
@@ -11,22 +11,19 @@ export default function NavBar() {
         { id: "projects", label: "Projects" },
     ];
 
-    // Show/hide nav on scroll direction
+    // Track how far down the page the user has scrolled, for the progress hairline
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > scrollY && window.scrollY > 100) {
-                setShowNav(false);
-            } else {
-                setShowNav(true);
-            }
-            setScrollY(window.scrollY);
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            setProgress(max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0);
         };
 
-        window.addEventListener("scroll", handleScroll);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [scrollY]);
+    }, []);
 
-    // Scrollspy — highlight nav link for the section currently in view
+    // Scrollspy — highlight nav tab for the section currently in view
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -48,36 +45,45 @@ export default function NavBar() {
     }, []);
 
     return (
-        <header
-            className={`fixed top-6 w-full z-50 transition-transform duration-300
-                ${showNav ? "translate-y-0" : "-translate-y-32"}`}
+        <motion.header
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="fixed top-0 inset-x-0 z-50"
         >
-            <nav className="mx-auto w-fit bg-zinc-900/70 backdrop-blur-md shadow-lg rounded-full px-2 py-1.5 flex items-center gap-1 border border-[#2c53c9]/20">
-                {sections.map((s) => {
-                    const isActive = activeSection === s.id;
-                    return (
-                        <button
-                            key={s.id}
-                            onClick={() =>
-                                document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })
-                            }
-                            className={`relative px-4 py-1.5 text-sm sm:text-base rounded-full transition-colors duration-200 cursor-pointer
-                                ${isActive
-                                    ? "text-[#F0EDEB]"
-                                    : "text-zinc-400 hover:text-[#F0EDEB]"
-                                }`}
-                        >
-                            {isActive && (
-                                <span
-                                    className="absolute inset-0 rounded-full bg-[#2c53c9]/20 border border-[#2c53c9]/40"
-                                    aria-hidden
-                                />
-                            )}
-                            <span className="relative">{s.label}</span>
-                        </button>
-                    );
-                })}
+            <nav className="border-b border-white/10 bg-zinc-950/50 backdrop-blur-md">
+                <div className="mx-auto flex h-12 max-w-5xl items-center justify-center px-4 sm:h-14 sm:px-8">
+                    <div className="flex items-center gap-4 font-mono uppercase tracking-[0.1em] sm:gap-7 sm:text-xs">
+                        {sections.map((s) => {
+                            const isActive = activeSection === s.id;
+                            return (
+                                <button
+                                    key={s.id}
+                                    onClick={() =>
+                                        document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })
+                                    }
+                                    className="relative cursor-pointer py-2 hover:scale-105 transition-all duration-150"
+                                >
+                                    <span
+                                        className={
+                                            isActive
+                                                ? "text-[#F0EDEB] text-[13px]"
+                                                : "text-zinc-500 transition-all duration-100 hover:text-zinc-300"
+                                        }
+                                    >
+                                        {s.label}
+                                    </span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* scroll progress hairline */}
+                <div className="h-[2px] w-full bg-white/5">
+                    <div className="h-full bg-[#2c53c9]" style={{ width: `${progress}%` }} />
+                </div>
             </nav>
-        </header>
+        </motion.header>
     );
 }
