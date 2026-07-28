@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 
 export default function NavBar() {
     const [progress, setProgress] = useState(0);
@@ -19,7 +18,7 @@ export default function NavBar() {
         };
 
         handleScroll();
-        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("scroll", handleScroll, { passive: true }); //passive:true ensures event.preventdefault is never run
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -45,12 +44,7 @@ export default function NavBar() {
     }, []);
 
     return (
-        <motion.header
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="fixed top-0 inset-x-0 z-50"
-        >
+        <header className="fixed top-0 inset-x-0 z-50">
             <nav className="border-b border-white/10 bg-zinc-950/50 backdrop-blur-md">
                 <div className="mx-auto flex h-12 max-w-5xl items-center justify-center px-4 sm:h-14 sm:px-8">
                     <div className="flex items-center gap-4 font-mono uppercase tracking-[0.1em] sm:gap-7">
@@ -84,6 +78,6 @@ export default function NavBar() {
                     <div className="h-full bg-[#2c53c9]" style={{ width: `${progress}%` }} />
                 </div>
             </nav>
-        </motion.header>
+        </header>
     );
 }
