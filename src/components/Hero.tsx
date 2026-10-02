@@ -43,9 +43,9 @@ export default function Hero() {
                 transition={{ type: "spring", duration: 1.2 }}
             >
                 <FadeContent blur={true} duration={500} delay={100} easing="ease-out" initialOpacity={0}>
-                    <p className="relative text-center z-20 py-6 mb-2 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl w-75 sm:w-150 md:w-175 xl:w-300">
+                    <h1 className="relative text-center z-20 py-6 mb-2 text-4xl font-bold text-[#F0EDEB] sm:text-5xl md:text-6xl lg:text-7xl w-75 sm:w-150 md:w-175 xl:w-300">
                         Hi, I'm Julian. <br/> A <span className="text-[#2c53c9]">Full-Stack Software Developer</span> based in Northern Virginia.
-                    </p>
+                    </h1>
                 </FadeContent>
             </motion.div>
 
@@ -71,7 +71,7 @@ export default function Hero() {
                     onClick={() => document.getElementById("projects")?.scrollIntoView({behavior:"smooth"})}
                     >
 
-                        See My Projects<ArrowDown className="size-4.5 mt-0.5"/>
+                        See My Projects<ArrowDown aria-hidden className="size-4.5 mt-0.5"/>
                     </Button>
                 </motion.div>
                 <motion.div
@@ -80,8 +80,9 @@ export default function Hero() {
                     transition={{ delay: 0.175, type: "spring" }}
                     className="mt-5"
                 >
-                    <a href="https://www.linkedin.com/in/julian-sales-880647202/" target="_blank" rel="noreferrer">
-                        <Linkedin 
+                    <a href="https://www.linkedin.com/in/julian-sales-880647202/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" className="block rounded-xl">
+                        <Linkedin
+                            aria-hidden
                             className="bg-zinc-950 text-[#2c53c9] hover:text-[#F0EDEB] hover:scale-105 size-12 sm:size-14 rounded-xl p-2.5 mr-2 transition-all duration-200" 
                             strokeWidth={1.5} 
                         />
@@ -93,8 +94,9 @@ export default function Hero() {
                     transition={{ delay: 0.25, type: "spring" }}
                     className="mt-5"
                 >
-                    <a href="https://github.com/memento-j" target="_blank" rel="noreferrer">
-                        <Github 
+                    <a href="https://github.com/memento-j" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" className="block rounded-xl">
+                        <Github
+                            aria-hidden
                             className="bg-zinc-950 text-[#2c53c9] hover:text-[#F0EDEB] hover:scale-105 size-12 sm:size-14 rounded-xl p-2.5 mr-1 transition-all duration-200" 
                             strokeWidth={1.5} 
                         />

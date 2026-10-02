@@ -36,14 +36,14 @@ export default function ProjectsList() {
 
                 >
                     <div>
-                        <p className="text-[#F0EDEB] sm:text-5xl text-3xl font-bold">Projects</p>
+                        <h2 className="text-[#F0EDEB] sm:text-5xl text-3xl font-bold">Projects</h2>
                         <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 my-3">Some of my completed projects</p>
                     </div>
                 </motion.div>
 
                 {projects.map((project, i) => (
                     <motion.div
-                        key={i}
+                        key={project.name}
                         initial={{ opacity: 0, y: 44 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.1, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}

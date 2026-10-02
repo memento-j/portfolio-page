@@ -53,6 +53,7 @@ export default function NavBar() {
                             return (
                                 <button
                                     key={s.id}
+                                    aria-current={isActive ? "location" : undefined}
                                     onClick={() =>
                                         document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })
                                     }

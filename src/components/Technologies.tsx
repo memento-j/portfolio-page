@@ -55,7 +55,7 @@ export default function TechnologiesList() {
     ]
 
     return(
-        <div className="bg-zinc-950 flex flex-col items-center justify-center pb-20 pt-40" id="skills">
+        <section className="bg-zinc-950 flex flex-col items-center justify-center pb-20 pt-40" id="skills">
             <div className="w-75 sm:w-150 md:w-180 lg:w-240 xl:w-300">
                 <motion.div
                     initial={{ opacity: 0, x: -100 }}
@@ -64,24 +64,25 @@ export default function TechnologiesList() {
                     viewport={{ once: true, amount: 0.1 }}
 
                 >
-                    <p className="text-[#F0EDEB] font-bold text-3xl sm:text-5xl">Technologies</p> 
+                    <h2 className="text-[#F0EDEB] font-bold text-3xl sm:text-5xl">Technologies</h2> 
                     <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 mt-3 mb-12">Here are some of the technologies I am profficient with</p>
                 </motion.div>  
                 {/* List  of technologies */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {technologies.map((technology, i) => (
                         <motion.div
+                            key={technology.name}
                             initial={{ opacity: 0, y: -40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.05 * i, type: "spring", duration: 1.2 }}
                             viewport={{ once: true, amount: 0.1 }}
                         >
-                            <TechnologyCard key={i} name={technology.name} description={technology.description}/>
+                            <TechnologyCard name={technology.name} description={technology.description}/>
                         </motion.div>
                     ))}
                 </div>   
             </div>  
-        </div>
+        </section>
 
     );
 }

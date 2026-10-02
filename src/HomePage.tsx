@@ -10,10 +10,12 @@ export default function HomePage() {
   return (
     <>
       <NavBar/>
-      <Hero/>
-      <TechnologiesList/>
-      <ProjectsList/> 
-      {/* <Images/>  */}
+      <main>
+        <Hero/>
+        <TechnologiesList/>
+        <ProjectsList/> 
+        {/* <Images/>  */}
+      </main>
       <Footer/>
     </>
   )

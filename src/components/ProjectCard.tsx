@@ -53,7 +53,7 @@ export default function ProjectCard({
                     />
                     {/* open affordance — appears on hover, no status dot */}
                     <span className="absolute top-4 right-4 grid place-items-center size-9 rounded-full bg-zinc-950/70 backdrop-blur-sm border border-zinc-700/60 text-[#F0EDEB] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 motion-reduce:transition-none">
-                        <ArrowUpRight className="size-4" />
+                        <ArrowUpRight aria-hidden className="size-4" />
                     </span>
                 </a>
 
@@ -85,22 +85,22 @@ export default function ProjectCard({
                     </div>
 
                     <div className="flex items-center gap-3 mt-8">
-                        <a href={link} target="_blank" rel="noopener noreferrer" aria-label={`${name} source on GitHub`}>
+                        <a href={link} target="_blank" rel="noopener noreferrer" aria-label={`${name} source on GitHub`} className="rounded-xl">
                             <div className="bg-zinc-950 text-[#2c53c9] hover:text-[#F0EDEB] hover:scale-105 size-11 rounded-xl p-2.5 transition-all duration-200 flex items-center justify-center motion-reduce:transition-none motion-reduce:hover:scale-100">
-                                <Github className="w-full h-full" strokeWidth={1.5} />
+                                <Github aria-hidden className="w-full h-full" strokeWidth={1.5} />
                             </div>
                         </a>
 
                         {live ? (
-                            <a href={live} target="_blank" rel="noopener noreferrer">
-                                <Button className="bg-[#2c53c9] text-[#F0EDEB] rounded-xl px-5 py-5.5 text-sm sm:text-base hover:bg-[#17389c] hover:scale-[1.04] hover:cursor-pointer transition-all duration-200 motion-reduce:transition-none motion-reduce:hover:scale-100">
+                            <Button asChild className="bg-[#2c53c9] text-[#F0EDEB] rounded-xl px-5 py-5.5 text-sm sm:text-base hover:bg-[#17389c] hover:scale-[1.04] hover:cursor-pointer transition-all duration-200 motion-reduce:transition-none motion-reduce:hover:scale-100">
+                                <a href={live} target="_blank" rel="noopener noreferrer">
                                     Live Demo
-                                    <ArrowUpRight className="size-4" />
-                                </Button>
-                            </a>
+                                    <ArrowUpRight aria-hidden className="size-4" />
+                                </a>
+                            </Button>
                         ) : note ? (
                             <p className="flex items-start gap-2 text-xs text-zinc-500 leading-relaxed max-w-sm">
-                                <Info className="size-3.5 mt-0.5 shrink-0 text-[#2c53c9]" strokeWidth={1.75} />
+                                <Info aria-hidden className="size-3.5 mt-0.5 shrink-0 text-[#2c53c9]" strokeWidth={1.75} />
                                 {note}
                             </p>
                         ) : null}

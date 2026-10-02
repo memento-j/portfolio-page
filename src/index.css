@@ -139,4 +139,8 @@ html, body {
   body {
     @apply bg-background text-foreground;
   }
+  /* visible keyboard focus for every link and button */
+  a:focus-visible, button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-[#2c53c9];
+  }
 }

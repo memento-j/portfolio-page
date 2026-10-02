@@ -21,18 +21,22 @@ export default function Footer() {
               href="https://www.linkedin.com/in/julian-sales-880647202/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="rounded-xl"
             >
               <div className="bg-zinc-950 hover:bg-zinc-800 hover:scale-107 size-10 rounded-xl p-2 transition duration-200 flex items-center justify-center">
-                <Linkedin className="text-[#2c53c9] w-full h-full" strokeWidth={1.5} />
+                <Linkedin aria-hidden className="text-[#2c53c9] w-full h-full" strokeWidth={1.5} />
               </div>
             </a>
             <a
               href="https://github.com/memento-j/portfolio-page"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Source code for this site on GitHub"
+              className="rounded-xl"
             >
               <div className="bg-zinc-950 hover:bg-zinc-800 hover:scale-107 size-10 rounded-xl p-2 transition duration-200 flex items-center justify-center">
-                <Github className="text-[#2c53c9] w-full h-full" strokeWidth={1.5} />
+                <Github aria-hidden className="text-[#2c53c9] w-full h-full" strokeWidth={1.5} />
               </div>
             </a>
           </div>
