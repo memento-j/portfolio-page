@@ -1,49 +1,46 @@
+import { lazy, Suspense, useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { Github, Linkedin } from "lucide-react";
- 
+import { footer, links } from "../lib/content";
+
+const Dawn = lazy(() => import("./three/Dawn"));
+
+// The closing shot: the hero's ridges at first light, a sign-off, and the two links that matter
 export default function Footer() {
-  return (
-    <footer className="w-full bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="relative mb-6">
-            <div className="absolute inset-0 h-px bg-gradient-to-r from-transparent via-[#2c53c9] to-transparent blur-[2px] opacity-80" />
-            <div className="h-px bg-gradient-to-r from-transparent via-[#2c53c9]/60 to-transparent" />
-        </div>
-        <div className="flex flex-row justify-between items-center">
- 
-          {/* Copyright */}
-          <p className="text-sm text-zinc-400">
-            © {new Date().getFullYear()} Julian Sales. All rights reserved.
-          </p>
- 
-          {/* Social links */}
-          <div className="flex flex-row gap-2">
-            <a
-              href="https://www.linkedin.com/in/julian-sales-880647202/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              className="rounded-xl"
-            >
-              <div className="bg-zinc-950 hover:bg-zinc-800 hover:scale-107 size-10 rounded-xl p-2 transition duration-200 flex items-center justify-center">
-                <Linkedin aria-hidden className="text-[#2c53c9] w-full h-full" strokeWidth={1.5} />
-              </div>
-            </a>
-            <a
-              href="https://github.com/memento-j/portfolio-page"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Source code for this site on GitHub"
-              className="rounded-xl"
-            >
-              <div className="bg-zinc-950 hover:bg-zinc-800 hover:scale-107 size-10 rounded-xl p-2 transition duration-200 flex items-center justify-center">
-                <Github aria-hidden className="text-[#2c53c9] w-full h-full" strokeWidth={1.5} />
-              </div>
-            </a>
-          </div>
- 
-        </div>
-      </div>
-    </footer>
-  );
+    const ref = useRef<HTMLElement>(null);
+    const reduce = useReducedMotion();
+    const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
+    // the dawn sky fades in over the night sky as the footer arrives
+    const dawnOpacity = useTransform(scrollYProgress, (p) => (reduce ? 1 : p * p * (3 - 2 * p)));
+
+    return (
+        <footer ref={ref} className="end">
+            <div className="end__sky" aria-hidden>
+                <motion.div className="end__dawn" style={{ opacity: dawnOpacity }} />
+                <Suspense fallback={null}>
+                    <Dawn className="scene-fade" progress={scrollYProgress} />
+                </Suspense>
+            </div>
+
+            <div className="end__content">
+                <p className="end__signoff">{footer.signoff}</p>
+                <div className="end__links">
+                    <a className="pill" href={links.linkedin} target="_blank" rel="noopener noreferrer">
+                        <Linkedin aria-hidden size={18} strokeWidth={1.9} />
+                        {footer.linkedin}
+                    </a>
+                    <a className="pill" href={links.github} target="_blank" rel="noopener noreferrer">
+                        <Github aria-hidden size={18} strokeWidth={1.9} />
+                        {footer.github}
+                    </a>
+                </div>
+            </div>
+
+            <p className="end__copy">
+                {footer.copyright(new Date().getFullYear())}
+                {" · "}
+                <a href={links.siteSource} target="_blank" rel="noopener noreferrer">{footer.siteSource}</a>
+            </p>
+        </footer>
+    );
 }
- 
