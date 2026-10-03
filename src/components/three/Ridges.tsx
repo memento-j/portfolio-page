@@ -48,13 +48,25 @@ export default function Ridges({ progress, horizon, className }: RidgesProps) {
             moon.scale.set(TAN * moonD * 0.42, TAN * moonD * 0.42, 1);
             scene.add(moon);
 
-            // the ridges
-            layers.forEach((layer, i) => scene.add(ridgeMesh(layer, i, nightPalette)));
+            // the ridges, each rising into place on load (see the entrance in update).
+            // The hero shows only the four nearer ridges (the footer keeps all six). Each keeps its index so
+            // its shape and colour match the footer's version of the same ridge.
+            const FIRST = 2;
+            const heroLayers = layers.slice(FIRST);
+            const ridges = heroLayers.map((layer, j) => {
+                const i = FIRST + j;
+                const mesh = ridgeMesh(layer, i, nightPalette);
+                scene.add(mesh);
+                // drop it far enough that even its highest peak starts below the bottom edge (with room for the tilt)
+                // the nearest, darkest ridge sits a little lower in the hero than in the footer
+                const rest = i === layers.length - 1 ? -TAN * layer.d * 0.14 : 0;
+                return { mesh, rest, drop: TAN * layer.d * (1.3 - layer.top + layer.amp), index: i };
+            });
 
             // mist drifting just above each nearer ridge
             const mistTexture = glowTexture(0);
-            const mists: { sprite: THREE.Sprite; speed: number; range: number }[] = [];
-            layers.slice(0, 5).forEach((layer, i) => {
+            const mists: { base: number; sprite: THREE.Sprite; speed: number; range: number }[] = [];
+            layers.slice(FIRST, 5).forEach((layer, i) => {
                 for (let m = 0; m < 2; m++) {
                     const d = layer.d * 0.85;
                     const halfH = TAN * d;
@@ -68,7 +80,7 @@ export default function Ridges({ progress, horizon, className }: RidgesProps) {
                     sprite.position.set((rand() - 0.5) * halfH * 4, -(layer.top + 0.06) * halfH, -d);
                     sprite.scale.set(halfH * (1.6 + rand()), halfH * 0.32, 1);
                     scene.add(sprite);
-                    mists.push({ sprite, speed: (0.6 + rand()) * halfH * 0.012 * (i % 2 ? 1 : -1), range: halfH * 2.5 });
+                    mists.push({ base: sprite.material.opacity, sprite, speed: (0.6 + rand()) * halfH * 0.012 * (i % 2 ? 1 : -1), range: halfH * 2.5 });
                 }
             });
 
@@ -101,6 +113,22 @@ export default function Ridges({ progress, horizon, className }: RidgesProps) {
             return {
                 resize: placeMoon,
                 update(time, delta) {
+                    // Entrance: every ridge starts fully below the screen and they rise in three pairs (near,
+                    // middle, far), so the range builds up from the bottom and nothing shows before its turn;
+                    // moon, mist and fireflies ease in last.
+                    // Reduced motion renders the settled landscape.
+                    const ease = (t: number) => 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3);
+                    const near = layers.length - 1;
+                    for (const r of ridges) {
+                        const group = Math.floor((near - r.index) / 2);   // 0 = nearest pair, 2 = farthest pair
+                        const t = reduce ? 1 : ease((time - 0.1 - group * 0.22) / 1.0);
+                        r.mesh.position.y = r.rest - r.drop * (1 - t);
+                    }
+                    const glow = reduce ? 1 : ease((time - 0.9) / 1.1);
+                    (moon.material as THREE.SpriteMaterial).opacity = glow;
+                    flyMaterial.uniforms.uOpacity.value = glow;
+                    for (const m of mists) (m.sprite.material as THREE.SpriteMaterial).opacity = m.base * glow;
+
                     starMaterial.uniforms.uTime.value = time;
                     flyMaterial.uniforms.uTime.value = time;
                     const p = progress.get();
@@ -111,7 +139,9 @@ export default function Ridges({ progress, horizon, className }: RidgesProps) {
                     camera.position.set(look.x, look.y + p * 7, -p * 22);
                     // aim the camera so the highest peaks (about 61.5% down with no tilt) sit just below the buttons
                     const target = horizon.get() + 0.035;
-                    camera.rotation.x = Math.min(0.2, Math.max(-0.1, (target - 0.615) * 2 * TAN));
+                    // the topmost hero ridge peaks about (1 + top - amp) / 2 down the frame with no tilt
+                    const peak = (1 + heroLayers[0].top - heroLayers[0].amp) / 2;
+                    camera.rotation.x = Math.min(0.2, Math.max(-0.1, (target - peak) * 2 * TAN));
                     // the moon moves with the tilt so it stays in the same corner of the screen
                     moon.position.y = moonBaseY + camera.position.y + Math.tan(camera.rotation.x) * (moonD + camera.position.z);
 

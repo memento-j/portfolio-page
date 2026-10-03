@@ -101,6 +101,8 @@ a { color: inherit; }
 }
 @keyframes scene-in { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .scene-fade { animation: none; } }
+/* the hero scene animates its own entrance (ridges rise from the bottom), so it skips the fade */
+.scene-layer { position: absolute; inset: 0; }
 
 /* the night sky behind the three.js ridges: deep at the top, a little lighter toward the horizon */
 .sky {

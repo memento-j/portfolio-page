@@ -57,7 +57,7 @@ export default function Hero() {
         <section id="home" ref={ref} className="hero">
             <div className="sky" aria-hidden>
                 <Suspense fallback={null}>
-                    <Ridges className="scene-fade" progress={scrollYProgress} horizon={horizon} />
+                    <Ridges className="scene-layer" progress={scrollYProgress} horizon={horizon} />
                 </Suspense>
             </div>
             <div className="hero__scrim" aria-hidden />
