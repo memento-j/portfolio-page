@@ -17,7 +17,7 @@ const dawnPalette: RidgePalette = {
     nearBody: "#0d0812",
 };
 
-// The page's closing shot: the Blue Ridge from the hero, as the night ends. Scrolling into the footer
+// The footer's scene: the Blue Ridge from the hero, as the night ends. Scrolling into the footer
 // warms the ridges from moonlight to dawn, raises the sun behind the farthest ridge and fades the stars.
 export default function Dawn({ progress, className }: DawnProps) {
     const ref = useRef<HTMLDivElement>(null);

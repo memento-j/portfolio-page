@@ -9,32 +9,32 @@ const sizes: Record<string, [number, number]> = {
 };
 
 // One project. The words lead: name, tagline, description, stack and actions sit first, and the
-// screenshot supports them beside it at its real proportions. The screenshot's reveal clips an inner
-// layer, and the frame repeats the main link for mouse users only; keyboard and screen reader users
-// reach each destination once, from the labelled buttons.
-function Scene({ project, flip }: { project: Project; flip: boolean }) {
+// screenshot supports them beside it at its real proportions. The screenshot fades and rises in, and
+// its frame repeats the main link for mouse users only; keyboard and screen reader users reach each
+// destination once, from the labelled buttons.
+function ProjectItem({ project, flip }: { project: Project; flip: boolean }) {
     const ref = useRef<HTMLElement>(null);
     const reduce = useReducedMotion();
     const [broken, setBroken] = useState(false);
     const [width, height] = sizes[project.name] ?? [1600, 784];
     const href = project.live || project.link;
 
-    const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 40%"] });
-    const clip = useTransform(scrollYProgress, [0, 1], reduce ? ["inset(0% 0 0% 0)", "inset(0% 0 0% 0)"] : ["inset(18% 0 18% 0)", "inset(0% 0 0% 0)"]);
-    const imageScale = useTransform(scrollYProgress, [0, 1], reduce ? [1, 1] : [1.12, 1]);
+    const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 45%"] });
+    const imageOpacity = useTransform(scrollYProgress, [0, 1], reduce ? [1, 1] : [0, 1]);
+    const imageY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [24, 0]);
 
     return (
-        <article ref={ref} className={`scene${flip ? " scene--flip" : ""}`}>
-            <div className="scene__text">
-                <h3 className="scene__name">{project.name}</h3>
-                <p className="scene__tagline">{project.tagline}</p>
-                <p className="scene__desc">{project.description}</p>
-                <ul className="scene__stack">
+        <article ref={ref} className={`project${flip ? " project--flip" : ""}`}>
+            <div className="project__text">
+                <h3 className="project__name">{project.name}</h3>
+                <p className="project__tagline">{project.tagline}</p>
+                <p className="project__desc">{project.description}</p>
+                <ul className="project__stack">
                     {project.technologies.map((tech) => (
                         <li key={tech}>{tech}</li>
                     ))}
                 </ul>
-                <div className="scene__actions">
+                <div className="project__actions">
                     {project.live && (
                         <a className="btn btn--live" href={project.live} target="_blank" rel="noopener noreferrer">
                             {projectsSection.liveLabel}
@@ -56,7 +56,7 @@ function Scene({ project, flip }: { project: Project; flip: boolean }) {
                     )}
                 </div>
                 {!project.live && project.note && (
-                    <p className="scene__note">
+                    <p className="project__note">
                         <Info aria-hidden size={16} strokeWidth={2} />
                         {project.note}
                     </p>
@@ -64,10 +64,10 @@ function Scene({ project, flip }: { project: Project; flip: boolean }) {
             </div>
 
             {href && (
-                <a className="scene__frame" href={href} target="_blank" rel="noopener noreferrer" tabIndex={-1} aria-hidden="true" style={{ aspectRatio: `${width} / ${height}` }}>
-                    <motion.div className="scene__reveal" style={{ clipPath: clip }}>
+                <a className="project__frame" href={href} target="_blank" rel="noopener noreferrer" tabIndex={-1} aria-hidden="true" style={{ aspectRatio: `${width} / ${height}` }}>
+                    <motion.div className="project__reveal" style={{ opacity: imageOpacity, y: imageY }}>
                         {broken ? (
-                            <span className="scene__fallback">{project.name}</span>
+                            <span className="project__fallback">{project.name}</span>
                         ) : (
                             <motion.img
                                 src={projectImage(project.name, 1600)}
@@ -77,8 +77,7 @@ function Scene({ project, flip }: { project: Project; flip: boolean }) {
                                 width={width}
                                 height={height}
                                 loading="lazy"
-                                style={{ scale: imageScale }}
-                                onError={() => setBroken(true)}
+                                                                onError={() => setBroken(true)}
                             />
                         )}
                     </motion.div>
@@ -96,9 +95,9 @@ export default function Projects() {
                 <h2 id="projects-heading" tabIndex={-1}>{projectsSection.title}</h2>
                 <p>{projectsSection.subtitle}</p>
             </div>
-            <div className="scenes">
+            <div className="project-list">
                 {projects.map((project, i) => (
-                    <Scene key={project.name} project={project} flip={i % 2 === 1} />
+                    <ProjectItem key={project.name} project={project} flip={i % 2 === 1} />
                 ))}
             </div>
         </section>

@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 export default function HomePage() {
     const active = useActiveSection(sections.map((s) => s.id));
 
-    // The nav sits clear over the opening shot and gains a ground once you scroll
+    // The nav sits clear over the hero and gains a ground once you scroll
     const [solid, setSolid] = useState(false);
     const { scrollY } = useScroll();
     useMotionValueEvent(scrollY, "change", (v) => setSolid(v > 60));

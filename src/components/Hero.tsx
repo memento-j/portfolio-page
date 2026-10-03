@@ -8,7 +8,7 @@ const Ridges = lazy(() => import("./three/Ridges"));
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// The opening shot: the Blue Ridge at night, layered ridgelines under a moon,
+// The hero: the Blue Ridge at night, layered ridgelines under a moon,
 // with the name landing in the sky above them.
 export default function Hero() {
     const ref = useRef<HTMLElement>(null);
@@ -33,12 +33,10 @@ export default function Hero() {
         return () => observer.disconnect();
     }, [horizon]);
 
-    // Scroll: the camera glides through the ridges (inside the scene), the title lifts away,
-    // and the top letterbox bar closes in as the shot ends.
+    // Scroll: the camera glides through the ridges (inside the scene) and the title lifts away.
     const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
     const contentY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, -160]);
     const contentOpacity = useTransform(scrollYProgress, [0, 0.75], reduce ? [1, 1] : [1, 0]);
-    const barHeight = useTransform(scrollYProgress, [0.15, 1], reduce ? ["0vh", "0vh"] : ["0vh", "13vh"]);
 
     // Scroll to the projects, then hand keyboard focus to their heading so screen readers announce it
     function toProjects() {
@@ -93,8 +91,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* only the top bar closes in; the ridges below fade into the void */}
-            <motion.div className="letterbox letterbox--top" style={{ height: barHeight }} aria-hidden />
         </section>
     );
 }

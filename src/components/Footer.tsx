@@ -5,7 +5,7 @@ import { footer, links } from "../lib/content";
 
 const Dawn = lazy(() => import("./three/Dawn"));
 
-// The closing shot: the hero's ridges at first light, a sign-off, and the two links that matter
+// The footer: the hero's ridges at first light, a sign-off, and the two links that matter
 export default function Footer() {
     const ref = useRef<HTMLElement>(null);
     const reduce = useReducedMotion();
