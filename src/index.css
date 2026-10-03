@@ -122,7 +122,7 @@ a { color: inherit; }
   z-index: 2;
   max-width: 64rem;
   margin: 0 auto;
-  padding: clamp(8.5rem, 24vh, 14rem) var(--gutter) 0;
+  padding: clamp(10rem, 30vh, 17rem) var(--gutter) 0;
   text-align: center;
 }
 .title {

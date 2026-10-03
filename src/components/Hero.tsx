@@ -1,5 +1,5 @@
-import { lazy, Suspense, useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { lazy, Suspense, useEffect, useRef } from "react";
+import { motion, useMotionValue, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, Github, Linkedin } from "lucide-react";
 import { footer, hero, links } from "../lib/content";
 
@@ -12,7 +12,26 @@ const ease = [0.16, 1, 0.3, 1] as const;
 // with the name landing in the sky above them.
 export default function Hero() {
     const ref = useRef<HTMLElement>(null);
+    const actionsRef = useRef<HTMLDivElement>(null);
     const reduce = useReducedMotion();
+
+    // Where the buttons end, as a fraction of the hero's height; the ridges are aimed to sit just below it
+    const horizon = useMotionValue(0.7);
+    useEffect(() => {
+        const hero = ref.current;
+        const actions = actionsRef.current;
+        if (!hero || !actions) return;
+        const measure = () => {
+            // layout positions (offsetTop) ignore the scroll lift and entrance animation offsets
+            const content = actions.offsetParent as HTMLElement | null;
+            const bottom = actions.offsetTop + actions.offsetHeight + (content?.offsetTop ?? 0);
+            if (hero.offsetHeight) horizon.set(Math.min(0.9, Math.max(0.4, bottom / hero.offsetHeight)));
+        };
+        measure();
+        const observer = new ResizeObserver(measure);
+        observer.observe(hero);
+        return () => observer.disconnect();
+    }, [horizon]);
 
     // Scroll: the camera glides through the ridges (inside the scene), the title lifts away,
     // and the top letterbox bar closes in as the shot ends.
@@ -40,7 +59,7 @@ export default function Hero() {
         <section id="home" ref={ref} className="hero">
             <div className="sky" aria-hidden>
                 <Suspense fallback={null}>
-                    <Ridges className="scene-fade" progress={scrollYProgress} />
+                    <Ridges className="scene-fade" progress={scrollYProgress} horizon={horizon} />
                 </Suspense>
             </div>
             <div className="hero__scrim" aria-hidden />
@@ -57,7 +76,7 @@ export default function Hero() {
 
                 <motion.div {...enter(0.7)}>
                     <p className="hero__sub">{hero.subheading}</p>
-                    <div className="hero__actions">
+                    <div className="hero__actions" ref={actionsRef}>
                         <a className="btn" href="#projects" onClick={toProjects}>
                             {hero.cta}
                             <ArrowDown aria-hidden size={18} strokeWidth={2.25} />

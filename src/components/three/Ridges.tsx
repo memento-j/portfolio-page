@@ -6,12 +6,13 @@ import { FOV, TAN, glowTexture, layers, nightPalette, ridgeMesh } from "./landsc
 
 interface RidgesProps {
     progress: MotionValue<number>   // 0 → 1 as the hero scrolls away
+    horizon: MotionValue<number>    // where the hero's buttons end, as a fraction of its height
     className?: string
 }
 
 // The Blue Ridge at night: layered ridgelines under a moon, with mist drifting between them.
 // Scrolling glides the camera forward and up, so near ridges move more than far ones.
-export default function Ridges({ progress, className }: RidgesProps) {
+export default function Ridges({ progress, horizon, className }: RidgesProps) {
     const ref = useRef<HTMLDivElement>(null);
     const reduce = useReducedMotion() ?? false;
 
@@ -88,10 +89,12 @@ export default function Ridges({ progress, className }: RidgesProps) {
             scene.add(fireflies);
             const flyPositions = fireflies.geometry.getAttribute("position") as THREE.BufferAttribute;
 
+            let moonBaseY = 0;
             function placeMoon() {
                 // high in the top-right corner, clear of the title on any screen shape
                 const wide = camera.aspect > 1;
-                moon.position.set(TAN * moonD * camera.aspect * (wide ? 0.8 : 0.62), TAN * moonD * (wide ? 0.72 : 0.86), -moonD);
+                moonBaseY = TAN * moonD * (wide ? 0.72 : 0.86);
+                moon.position.set(TAN * moonD * camera.aspect * (wide ? 0.8 : 0.62), moonBaseY, -moonD);
             }
 
             const look = new THREE.Vector2();
@@ -106,6 +109,11 @@ export default function Ridges({ progress, className }: RidgesProps) {
                     look.x += (pointer.x * 3 - look.x) * Math.min(1, delta * 2);
                     look.y += (-pointer.y * 1.2 - look.y) * Math.min(1, delta * 2);
                     camera.position.set(look.x, look.y + p * 7, -p * 22);
+                    // aim the camera so the highest peaks (about 61.5% down with no tilt) sit just below the buttons
+                    const target = horizon.get() + 0.035;
+                    camera.rotation.x = Math.min(0.2, Math.max(-0.1, (target - 0.615) * 2 * TAN));
+                    // the moon moves with the tilt so it stays in the same corner of the screen
+                    moon.position.y = moonBaseY + camera.position.y + Math.tan(camera.rotation.x) * (moonD + camera.position.z);
 
                     for (const m of mists) {
                         m.sprite.position.x += m.speed * delta;
@@ -125,7 +133,7 @@ export default function Ridges({ progress, className }: RidgesProps) {
             window.removeEventListener("pointermove", onMove);
             dispose();
         };
-    }, [progress, reduce]);
+    }, [progress, horizon, reduce]);
 
     return <div ref={ref} className={className} aria-hidden />;
 }
