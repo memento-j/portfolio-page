@@ -4,18 +4,18 @@ import { ArrowDown, Github, Linkedin } from "lucide-react";
 import { footer, hero, links } from "../lib/content";
 
 // three.js loads after the page's own content, so the title never waits on it
-const Ridges = lazy(() => import("./three/Ridges"));
+const Clouds = lazy(() => import("./three/Clouds"));
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// The hero: the Blue Ridge at night, layered ridgelines under a moon,
-// with the name landing in the sky above them.
+// The hero: a night sky with stars, the moon and drifting moonlit clouds,
+// with the name above them.
 export default function Hero() {
     const ref = useRef<HTMLElement>(null);
     const actionsRef = useRef<HTMLDivElement>(null);
     const reduce = useReducedMotion();
 
-    // Where the buttons end, as a fraction of the hero's height; the ridges are aimed to sit just below it
+    // Where the buttons end, as a fraction of the hero's height; the clouds sit just below it
     const horizon = useMotionValue(0.7);
     useEffect(() => {
         const hero = ref.current;
@@ -33,7 +33,7 @@ export default function Hero() {
         return () => observer.disconnect();
     }, [horizon]);
 
-    // Scroll: the camera glides through the ridges (inside the scene) and the title lifts away.
+    // Scroll: the camera glides through the clouds (inside the scene) and the title lifts away.
     const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
     const contentY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, -160]);
     const contentOpacity = useTransform(scrollYProgress, [0, 0.75], reduce ? [1, 1] : [1, 0]);
@@ -57,7 +57,7 @@ export default function Hero() {
         <section id="home" ref={ref} className="hero">
             <div className="sky" aria-hidden>
                 <Suspense fallback={null}>
-                    <Ridges className="scene-layer" progress={scrollYProgress} horizon={horizon} />
+                    <Clouds className="scene-layer" progress={scrollYProgress} horizon={horizon} />
                 </Suspense>
             </div>
             <div className="hero__scrim" aria-hidden />
