@@ -36,10 +36,10 @@ export default function Ridges({ progress, horizon, className }: RidgesProps) {
             const stars = emptyPoints();
             const skyD = 420;
             const ice = new THREE.Color("#dfe8ff");
-            for (let i = 0; i < (narrow ? 140 : 260); i++) {
+            for (let i = 0; i < (narrow ? 320 : 620); i++) {
                 const x = (rand() - 0.5) * TAN * skyD * 6;
                 const y = rand() * TAN * skyD * 1.1 - TAN * skyD * 0.05;
-                pushPoint(stars, x, y, -skyD, ice, 1 + Math.pow(rand(), 4) * 2.4, rand(), 0);
+                pushPoint(stars, x, y, -skyD, ice, 1.5 + Math.pow(rand(), 3) * 3.6, rand(), 0);
             }
             scene.add(buildPoints(stars, starMaterial));
 
