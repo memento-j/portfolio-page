@@ -7,8 +7,8 @@
   --dusk: #0c0820;           /* where the night has deepened by the end of Projects; the footer sky starts here */
   --text: #f4f0fb;
   --muted: #a8a0bf;
-  --cyan: #5cc8ff;          /* the one action colour */
-  --ice: #d8f1ff;           /* cool white for emphasis next to the cyan */
+  --accent: #5cc8ff;        /* cyan: the one action colour */
+  --ice: #d8f1ff;           /* cool white for emphasis and the focus ring */
 
   --display: "Unbounded", "Arial Black", sans-serif;
   --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
@@ -40,7 +40,7 @@ ul { padding: 0; list-style: none; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 
-::selection { background: var(--cyan); color: var(--void); }
+::selection { background: var(--accent); color: var(--void); }
 :where(a, button):focus-visible { outline: 2px solid var(--ice); outline-offset: 4px; border-radius: 4px; }
 
 /* ── Navigation ──────────────────────────────────────────── */
@@ -52,11 +52,27 @@ a { color: inherit; }
   display: flex;
   justify-content: center;
   padding: 1rem var(--gutter);
-  transition: background-color 400ms var(--ease-out), border-color 400ms var(--ease-out);
-  border-bottom: 1px solid transparent;
+  pointer-events: none;      /* only the links themselves take clicks */
 }
-.nav--solid { background: rgba(4, 3, 10, 0.88); border-bottom-color: rgba(140, 123, 255, 0.16); }
-.nav ul { display: flex; gap: clamp(1.25rem, 4vw, 3rem); }
+/* over the hero the links stand alone; once you scroll they gather into a frosted pill */
+.nav ul {
+  display: flex;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  padding: 0 1.6rem;           /* the same in both states, so only colour and transform animate */
+  border: 1px solid transparent;
+  border-radius: 999px;
+  pointer-events: auto;
+  transition: background-color 500ms var(--ease-out), border-color 500ms var(--ease-out),
+    box-shadow 500ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.nav--solid ul {
+  background: rgba(10, 7, 22, 0.72);
+  border-color: rgba(140, 123, 255, 0.2);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px -20px rgba(0, 0, 0, 0.9);
+  transform: translateY(-0.25rem);
+}
 .nav a {
   position: relative;
   display: flex;
@@ -71,17 +87,21 @@ a { color: inherit; }
   color: var(--muted);
   transition: color 200ms;
 }
-.nav a::after {
-  content: "";
+.nav a:hover, .nav a:focus-visible, .nav a[aria-current] { color: var(--text); }
+/* the one marker that glides between links: an underline over the hero, a dot in the pill */
+.nav__marker {
   position: absolute;
   left: 0; right: 0.32em; bottom: 0;
   height: 2px;
-  background: var(--cyan);
-  transform: scaleX(0);
-  transition: transform 400ms var(--ease-out);
+  background: var(--accent);
 }
-.nav a:hover, .nav a[aria-current] { color: var(--text); }
-.nav a[aria-current]::after { transform: scaleX(1); }
+.nav--solid .nav__marker {
+  left: calc(50% - 0.16em - 2.5px); right: auto;
+  bottom: 5px;
+  width: 5px;
+  height: 5px;
+}
+@media (prefers-reduced-motion: reduce) { .nav ul { transition: none; } }
 
 /* ── Hero: the night ridges ────────────────────────────────── */
 
@@ -136,11 +156,30 @@ a { color: inherit; }
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
-  text-shadow: 0 4px 40px rgba(4, 3, 10, 0.55);
 }
-.title__name { display: block; }
+/* one shadow for the whole name: per-letter shadows would overlap the tightly tracked neighbours */
+.title__name { position: relative; display: block; filter: drop-shadow(0 4px 24px rgba(4, 3, 10, 0.55)); }
+/* each word clips its letters at the bottom, so they rise out of an invisible edge; the padding
+   (cancelled by the negative margin) leaves room for the comma's tail and the hover lift */
+.title__word {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: clip;
+  padding: 0.12em 0.05em 0.2em;
+  margin: -0.12em -0.05em -0.2em;
+}
+.title__rise { display: inline-block; }
+.title__char {
+  display: inline-block;
+  transition: transform 450ms var(--ease-out), color 300ms;
+}
+/* each letter lifts a little as the cursor passes over it */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .title__char:hover { transform: translateY(-0.07em); color: var(--ice); transition-duration: 150ms; }
+}
 .title__role {
   display: block;
+  text-shadow: 0 2px 18px rgba(4, 3, 10, 0.8);
   margin: 1.5rem auto 0;
   max-width: 30ch;
   font-family: var(--body);
@@ -151,10 +190,35 @@ a { color: inherit; }
   color: var(--text);
   text-wrap: balance;
 }
+.title__role-in { display: block; }
 .title__role em {
   font-style: normal;
   font-weight: 700;
   color: var(--ice);
+}
+/* the role types itself out: untyped letters keep their space, so the line never reflows */
+.title__role .is-untyped { visibility: hidden; }
+.title__role em > span { position: relative; }
+.title__role .has-caret::after,
+.title__role .has-caret-before::before {
+  content: "";
+  position: absolute;
+  top: 0.12em;
+  width: 2px;
+  height: 1em;
+  background: var(--accent);
+  visibility: visible;
+  animation: caret-blink 1s steps(1) infinite;
+}
+.title__role .has-caret::after { right: -3px; }
+.title__role .has-caret-before::before { left: -3px; }
+@keyframes caret-blink { 50% { opacity: 0; } }
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 .hero__sub {
   margin: 1.25rem auto 0;
@@ -182,7 +246,7 @@ a { color: inherit; }
   min-height: 3.25rem;
   padding: 0 1.6rem;
   border-radius: 999px;
-  background: var(--cyan);
+  background: var(--accent);
   color: var(--void);
   font-weight: 700;
   font-size: 1rem;
@@ -210,10 +274,10 @@ a { color: inherit; }
   text-decoration: none;
   transition: border-color 200ms, color 200ms, transform 250ms var(--ease-out);
 }
-.pill:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+.pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
 
-/* the ridges fade into the void instead of stopping at the section edge */
+/* the clouds fade into the void instead of stopping at the section edge */
 .hero::after {
   content: "";
   position: absolute;
@@ -240,9 +304,9 @@ a { color: inherit; }
   font-size: clamp(2.6rem, 7vw, 4.5rem);
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;   /* capitals: Unbounded's lowercase j has a flat, clipped-looking tail */
   width: fit-content;
-  padding-bottom: 0.08em;   /* room for the j's descender, clear of the focus ring */
 }
 .projects__head h2:focus { outline: 2px solid var(--ice); outline-offset: 8px; border-radius: 4px; }
 .projects__head h2:focus:not(:focus-visible) { outline: none; }
@@ -258,7 +322,7 @@ a { color: inherit; }
   content: "";
   flex: 0 0 2.5rem;
   height: 2px;
-  background: var(--cyan);
+  background: var(--accent);
 }
 
 .project-list { display: grid; gap: clamp(5rem, 10vw, 8rem); padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(6rem, 12vw, 9rem); }
@@ -345,7 +409,7 @@ a { color: inherit; }
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--cyan);
+  background: var(--accent);
 }
 .project__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1.75rem; }
 .project__note {

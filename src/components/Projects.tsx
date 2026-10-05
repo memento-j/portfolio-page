@@ -77,7 +77,7 @@ function ProjectItem({ project, flip }: { project: Project; flip: boolean }) {
                                 width={width}
                                 height={height}
                                 loading="lazy"
-                                                                onError={() => setBroken(true)}
+                                onError={() => setBroken(true)}
                             />
                         )}
                     </motion.div>
