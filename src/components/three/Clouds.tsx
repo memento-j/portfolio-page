@@ -11,12 +11,14 @@ interface CloudsProps {
 }
 
 // Far to near. `below` is how far under the buttons the layer's band sits (fraction of the frame);
-// nearer layers are darker, larger, denser and drift faster.
+// nearer layers are darker, larger, denser and drift faster. `rise` is how far the layer travels up the
+// screen over the hero's scroll (fraction of the frame): far layers lag behind the page, near ones
+// sweep past it, which is what makes the depth read.
 const cloudLayers = [
-    { d: 320, below: 0.15, color: "#7e8ac8", opacity: 0.22, count: 9, size: 1.1, drift: 0.006 },
-    { d: 210, below: 0.22, color: "#6672b0", opacity: 0.3, count: 8, size: 1.25, drift: 0.01 },
-    { d: 130, below: 0.31, color: "#4b558c", opacity: 0.42, count: 7, size: 1.4, drift: 0.016 },
-    { d: 80, below: 0.42, color: "#262b50", opacity: 0.75, count: 6, size: 1.6, drift: 0.024 },
+    { d: 320, below: 0.15, color: "#7e8ac8", opacity: 0.22, count: 9, size: 1.1, drift: 0.006, rise: -0.18 },
+    { d: 210, below: 0.22, color: "#6672b0", opacity: 0.3, count: 8, size: 1.25, drift: 0.01, rise: -0.04 },
+    { d: 130, below: 0.31, color: "#4b558c", opacity: 0.42, count: 7, size: 1.4, drift: 0.016, rise: 0.16 },
+    { d: 80, below: 0.42, color: "#262b50", opacity: 0.75, count: 6, size: 1.6, drift: 0.024, rise: 0.42 },
 ];
 
 // One soft cloud drawn on a canvas: overlapping puffs, a rounded top and a flatter base,
@@ -141,7 +143,7 @@ export default function Clouds({ progress, horizon, className }: CloudsProps) {
                         const t = reduce ? 1 : ease((time - 0.15 - c.li * 0.18) / 1.4);
                         // the band sits just below the buttons, each nearer layer a little lower
                         const frac = Math.min(0.98, h + c.layer.below + c.jitter);
-                        c.sprite.position.y = (1 - 2 * frac) * c.halfH - (1 - t) * c.halfH * 0.18;
+                        c.sprite.position.y = (1 - 2 * frac + 2 * c.layer.rise * p) * c.halfH - (1 - t) * c.halfH * 0.18;
                         (c.sprite.material as THREE.SpriteMaterial).opacity = c.base * t;
                         if (!reduce) {
                             c.sprite.position.x += c.layer.drift * c.halfH * delta;
@@ -150,10 +152,11 @@ export default function Clouds({ progress, horizon, className }: CloudsProps) {
                     }
                     (moon.material as THREE.SpriteMaterial).opacity = reduce ? 1 : ease((time - 0.6) / 1.2);
 
-                    // glide forward and rise slightly as the hero scrolls away
-                    look.x += (pointer.x * 3 - look.x) * Math.min(1, delta * 2);
-                    look.y += (-pointer.y * 1.2 - look.y) * Math.min(1, delta * 2);
-                    camera.position.set(look.x, look.y + p * 7, -p * 22);
+                    // glide forward through the clouds as the hero scrolls away, so the near ones swell past;
+                    // the mouse sways the camera, which shifts near clouds much more than far ones
+                    look.x += (pointer.x * 7 - look.x) * Math.min(1, delta * 2);
+                    look.y += (-pointer.y * 2.5 - look.y) * Math.min(1, delta * 2);
+                    camera.position.set(look.x, look.y + p * 4, -p * 34);
                     moon.position.y = moonBaseY + camera.position.y;
                 },
             };
