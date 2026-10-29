@@ -4,6 +4,7 @@ import { ArrowUpRight, Info } from "lucide-react";
 import { footer, projects, projectsSection, projectImage, type Project } from "../lib/content";
 
 const sizes: Record<string, [number, number]> = {
+    "Pondo": [1200, 630],      // pondo-1600.webp is the 1200px original, not upscaled
     "AI Interview Practice Tool": [1600, 784],
     "Music Playlist Transferrer": [1600, 788],
 };

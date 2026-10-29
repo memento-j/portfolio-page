@@ -339,6 +339,7 @@ a { color: inherit; }
 }
 
 .project__label {
+  align-self: start;          /* the label's text always starts at the top of its row */
   max-width: 26rem;
   padding-top: 1.25rem;
   border-top: 1px solid rgba(140, 123, 255, 0.4);
