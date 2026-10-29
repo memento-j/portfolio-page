@@ -164,16 +164,16 @@ export default function Hero() {
                     <motion.div {...enter(0.55)}>
                         <p className="hero__sub">{hero.subheading}</p>
                         <div className="hero__actions" ref={actionsRef}>
-                            <a className="btn" href="#projects" onClick={toProjects}>
+                            <a className="hero__cta" href="#projects" onClick={toProjects}>
                                 {hero.cta}
                                 <ArrowDown aria-hidden size={18} strokeWidth={2.25} />
                             </a>
-                            <a className="pill" href={links.linkedin} target="_blank" rel="noopener noreferrer">
-                                <Linkedin aria-hidden size={18} strokeWidth={1.9} />
+                            <a className="text-link" href={links.linkedin} target="_blank" rel="noopener noreferrer">
+                                <Linkedin aria-hidden size={17} strokeWidth={1.9} />
                                 {footer.linkedin}
                             </a>
-                            <a className="pill" href={links.github} target="_blank" rel="noopener noreferrer">
-                                <Github aria-hidden size={18} strokeWidth={1.9} />
+                            <a className="text-link" href={links.github} target="_blank" rel="noopener noreferrer">
+                                <Github aria-hidden size={17} strokeWidth={1.9} />
                                 {footer.github}
                             </a>
                         </div>

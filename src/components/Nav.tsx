@@ -3,9 +3,10 @@ import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion
 import { sections } from "../lib/content";
 import useActiveSection from "../lib/useActiveSection";
 
-// The fixed nav. Over the top of the hero it is just the words; once you scroll it gathers into a
-// small frosted pill. One cyan marker glides between the links: under the current section, or
-// under whichever link is hovered or focused. Over the hero it's an underline; in the pill, a dot.
+// The fixed nav, top centre: the two links sit at either end of a long horizon line, echoing the
+// hero's sky. A short cyan segment on the line slides toward the current section, or toward the link
+// being hovered or focused. Once you scroll, the line draws in short and a dark fade rises behind the
+// links so they stay readable over the page.
 export default function Nav() {
     const active = useActiveSection(sections.map((s) => s.id));
     const reduce = useReducedMotion();
@@ -18,17 +19,28 @@ export default function Nav() {
     }, [active, clicked]);
     const marked = hovered ?? clicked ?? active;
 
-    const [solid, setSolid] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const { scrollY } = useScroll();
-    useMotionValueEvent(scrollY, "change", (v) => setSolid(v > 60));
+    // the line stays long for the first couple of scrolls, then draws in
+    useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > window.innerHeight * 0.15));
+
+    // the line and links glide to their new lengths and places (layout animation, transform only)
+    const glide = reduce ? { duration: 0 } : { type: "spring" as const, stiffness: 220, damping: 30 };
 
     return (
         <header>
-            <nav className={`nav${solid ? " nav--solid" : ""}`} aria-label="Sections">
+            <nav className={`nav${scrolled ? " nav--scrolled" : ""}`} aria-label="Sections">
                 <ul onMouseLeave={() => setHovered(null)}>
-                    {sections.map((s) => (
+                    {sections.map((s, i) => (
                         <li key={s.id}>
-                            <a
+                            {i > 0 && (
+                                <motion.span layout aria-hidden className="nav__horizon" transition={glide}>
+                                    <span className="nav__sun" data-side={marked === sections[0].id ? "start" : "end"} />
+                                </motion.span>
+                            )}
+                            <motion.a
+                                layout
+                                transition={glide}
                                 href={`#${s.id}`}
                                 aria-current={(clicked ?? active) === s.id ? "location" : undefined}
                                 onClick={() => setClicked(s.id === active ? null : s.id)}
@@ -37,16 +49,7 @@ export default function Nav() {
                                 onBlur={() => setHovered(null)}
                             >
                                 {s.label}
-                                {marked === s.id && (
-                                    <motion.span
-                                        layoutId="nav-marker"
-                                        className="nav__marker"
-                                        style={{ borderRadius: 99 }}
-                                        transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
-                                        aria-hidden
-                                    />
-                                )}
-                            </a>
+                            </motion.a>
                         </li>
                     ))}
                 </ul>

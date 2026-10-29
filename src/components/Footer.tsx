@@ -25,12 +25,12 @@ export default function Footer() {
             <div className="end__content">
                 <p className="end__signoff">{footer.signoff}</p>
                 <div className="end__links">
-                    <a className="pill" href={links.linkedin} target="_blank" rel="noopener noreferrer">
-                        <Linkedin aria-hidden size={18} strokeWidth={1.9} />
+                    <a className="text-link" href={links.linkedin} target="_blank" rel="noopener noreferrer">
+                        <Linkedin aria-hidden size={17} strokeWidth={1.9} />
                         {footer.linkedin}
                     </a>
-                    <a className="pill" href={links.github} target="_blank" rel="noopener noreferrer">
-                        <Github aria-hidden size={18} strokeWidth={1.9} />
+                    <a className="text-link" href={links.github} target="_blank" rel="noopener noreferrer">
+                        <Github aria-hidden size={17} strokeWidth={1.9} />
                         {footer.github}
                     </a>
                 </div>

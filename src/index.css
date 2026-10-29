@@ -45,63 +45,63 @@ a { color: inherit; }
 
 /* ── Navigation ──────────────────────────────────────────── */
 
+/* top centre: the two links sit at either end of a horizon line; once you scroll, the line draws in
+   short and a dark fade rises behind them */
 .nav {
   position: fixed;
   z-index: 50;
   top: 0; left: 0; right: 0;
   display: flex;
   justify-content: center;
-  padding: 1rem var(--gutter);
+  padding: 1rem var(--gutter) 1.75rem;
   pointer-events: none;      /* only the links themselves take clicks */
 }
-/* over the hero the links stand alone; once you scroll they gather into a frosted pill */
-.nav ul {
-  display: flex;
-  gap: clamp(1.25rem, 3vw, 2rem);
-  padding: 0 1.6rem;           /* the same in both states, so only colour and transform animate */
-  border: 1px solid transparent;
-  border-radius: 999px;
-  pointer-events: auto;
-  transition: background-color 500ms var(--ease-out), border-color 500ms var(--ease-out),
-    box-shadow 500ms var(--ease-out), transform 500ms var(--ease-out);
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(4, 3, 10, 0.96) 0%, rgba(4, 3, 10, 0.85) 55%, transparent 100%);
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out);
 }
-.nav--solid ul {
-  background: rgba(10, 7, 22, 0.72);
-  border-color: rgba(140, 123, 255, 0.2);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 16px 40px -20px rgba(0, 0, 0, 0.9);
-  transform: translateY(-0.25rem);
-}
+.nav--scrolled::before { opacity: 1; }
+.nav ul { position: relative; display: flex; align-items: center; gap: 1rem; pointer-events: auto; }
+.nav li { display: flex; align-items: center; gap: 1rem; }
 .nav a {
-  position: relative;
   display: flex;
   align-items: center;
   min-height: 44px;
-  padding: 0;
   font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--muted);
   transition: color 200ms;
 }
 .nav a:hover, .nav a:focus-visible, .nav a[aria-current] { color: var(--text); }
-/* the one marker that glides between links: an underline over the hero, a dot in the pill */
-.nav__marker {
+.nav__horizon {
+  position: relative;
+  display: block;
+  width: clamp(5rem, 36vw, 26rem);
+  height: 1px;
+  background: linear-gradient(to right, rgba(140, 123, 255, 0.15), rgba(140, 123, 255, 0.55), rgba(140, 123, 255, 0.15));
+}
+.nav--scrolled .nav__horizon { width: 2.75rem; }
+/* the cyan segment slides toward the current (or hovered) section's end of the line */
+.nav__sun {
   position: absolute;
-  left: 0; right: 0.32em; bottom: 0;
-  height: 2px;
+  top: -1px;
+  width: 32%;
+  height: 3px;
   background: var(--accent);
+  transition: left 650ms var(--ease-out);
 }
-.nav--solid .nav__marker {
-  left: calc(50% - 0.16em - 2.5px); right: auto;
-  bottom: 5px;
-  width: 5px;
-  height: 5px;
+.nav__sun[data-side="start"] { left: 0; }
+.nav__sun[data-side="end"] { left: 68%; }
+@media (prefers-reduced-motion: reduce) {
+  .nav::before, .nav__sun { transition: none; }
 }
-@media (prefers-reduced-motion: reduce) { .nav ul { transition: none; } }
 
 /* ── Hero: the night ridges ────────────────────────────────── */
 
@@ -232,50 +232,27 @@ a { color: inherit; }
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 2.25rem;
-}
-@media (max-width: 480px) {
-  .hero__actions .btn { flex-basis: 100%; justify-content: center; }
+  gap: 0.25rem clamp(1.25rem, 4vw, 2rem);
+  margin-top: 2rem;
 }
 
-.btn {
+/* actions are plain underlined links: the cyan .hero__cta leads, .text-link (LinkedIn, GitHub) follows */
+.hero__cta,
+.text-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  min-height: 3.25rem;
-  padding: 0 1.6rem;
-  border-radius: 999px;
-  background: var(--accent);
-  color: var(--void);
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 10px 30px -14px rgba(92, 200, 255, 0.5);
-  transition: transform 250ms var(--ease-out), background-color 250ms;
+  gap: 0.5rem;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 0.4em;
+  text-shadow: 0 1px 12px rgba(4, 3, 10, 0.9);
+  transition: color 200ms var(--ease-out), text-decoration-color 200ms var(--ease-out);
 }
-.btn:hover { transform: translateY(-2px); background: #86d8ff; }
-.btn svg { transition: transform 300ms var(--ease-out); }
-.btn:hover svg { transform: translateY(2px); }
-.btn--live:hover svg { transform: translate(2px, -2px); }
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  min-height: 3.25rem;
-  padding: 0 1.35rem;
-  border-radius: 999px;
-  border: 1px solid rgba(244, 240, 251, 0.28);
-  background: rgba(4, 3, 10, 0.4);
-  color: var(--text);
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: border-color 200ms, color 200ms, transform 250ms var(--ease-out);
-}
-.pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
+.hero__cta { font-size: 1.0625rem; font-weight: 700; color: var(--accent); text-decoration-thickness: 2px; }
+.hero__cta svg { transition: transform 300ms var(--ease-out); }
+.hero__cta:hover svg { transform: translateY(3px); }
+.text-link { font-weight: 600; color: var(--text); text-decoration-color: rgba(140, 123, 255, 0.55); }
+.text-link:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 /* the clouds fade into the void instead of stopping at the section edge */
 .hero::after {
@@ -295,6 +272,7 @@ a { color: inherit; }
 
 .projects {
   padding: clamp(2.5rem, 5vw, 4rem) var(--gutter) 0;
+  overflow-x: clip;           /* projects slide in from the sides; never let them widen the page */
   /* the night slowly deepens toward violet as you read, so the footer's dawn arrives rather than switches on */
   background: linear-gradient(to bottom, var(--void) 0%, var(--void) 30%, var(--dusk) 100%);
 }
@@ -311,63 +289,45 @@ a { color: inherit; }
 .projects__head h2:focus { outline: 2px solid var(--ice); outline-offset: 8px; border-radius: 4px; }
 .projects__head h2:focus:not(:focus-visible) { outline: none; }
 .projects__head p {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  margin-top: 1.4rem;
+  margin-top: 1rem;
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   color: var(--muted);
 }
-.projects__head p::before {
-  content: "";
-  flex: 0 0 2.5rem;
-  height: 2px;
-  background: var(--accent);
-}
 
-.project-list { display: grid; gap: clamp(5rem, 10vw, 8rem); padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(6rem, 12vw, 9rem); }
-
-/* the words lead; the screenshot supports them beside it, alternating sides */
-.project {
+.project-list {
   display: grid;
-  gap: 2rem;
-  align-items: center;
+  gap: clamp(5rem, 10vw, 8rem);
   max-width: var(--max);
   margin: 0 auto;
-  width: 100%;
-}
-@media (min-width: 960px) {
-  .project { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(3rem, 5vw, 4.5rem); }
-  .project--flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
-  .project--flip .project__text { order: 2; }
+  padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(6rem, 12vw, 9rem);
 }
 
-/* screenshot frame: the image fades and rises in as the project scrolls into view */
-.project__frame {
+/* hung like a gallery wall: the screenshot is the piece, a small label sits beside its bottom edge */
+.project { display: grid; gap: 1.75rem; }
+@media (min-width: 960px) {
+  .project { grid-template-columns: 68% minmax(0, 1fr); column-gap: clamp(2.5rem, 4vw, 3.5rem); align-items: end; }
+  .project--flip { grid-template-columns: minmax(0, 1fr) 68%; }
+  .project--flip .project__plate { order: 2; }
+  .project--flip .project__label { justify-self: end; }
+}
+
+/* the screenshot rises in as the project scrolls into view; on hover it eases in a touch */
+.project__plate {
   position: relative;
   display: block;
   overflow: hidden;
   background: var(--void-2);
-  border-radius: 6px;
-  box-shadow: 0 0 0 1px rgba(140, 123, 255, 0.18), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-  text-decoration: none;
+  box-shadow: 0 0 0 1px rgba(140, 123, 255, 0.14), 0 40px 80px -40px rgba(0, 0, 0, 0.95);
 }
-.project__reveal { position: absolute; inset: 0; }
-.project__frame img {
+.project__plate img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top;
   transition: transform 900ms var(--ease-out);
 }
-.project__frame:hover img { transform: scale(1.03); }
-.project__frame::after {           /* soft inner vignette */
-  content: "";
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.35);
-  pointer-events: none;
-}
+.project__plate:hover img { transform: scale(1.02); }
+@media (prefers-reduced-motion: reduce) { .project__plate img { transition: none; } }
 .project__fallback {
   display: grid;
   place-items: center;
@@ -378,46 +338,40 @@ a { color: inherit; }
   color: var(--muted);
 }
 
+.project__label {
+  max-width: 26rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(140, 123, 255, 0.4);
+}
 .project__name {
   font-family: var(--display);
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(1.35rem, 2vw, 1.6rem);
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
-.project__tagline {
-  margin-top: 0.6rem;
-  font-size: 0.8125rem;
+.project__tagline { margin-top: 0.35rem; font-size: 0.9375rem; color: var(--ice); }
+.project__stack { margin-top: 0.9rem; font-size: 0.875rem; line-height: 1.55; color: var(--muted); }
+.project__desc { margin-top: 1rem; font-size: 0.975rem; line-height: 1.65; }
+.project__links { display: flex; flex-direction: column; align-items: flex-start; margin-top: 1rem; }
+.project__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
   font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--ice);
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
 }
-.project__desc { margin-top: 1.25rem; color: var(--text); line-height: 1.7; }
-.project__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.1rem;
-  margin-top: 1.25rem;
-  font-size: 0.9375rem;
-  color: var(--muted);
-}
-.project__stack li { display: inline-flex; align-items: center; gap: 0.5rem; }
-.project__stack li::before {
-  content: "";
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-.project__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1.75rem; }
+.project__link:hover { text-decoration-thickness: 2px; }
 .project__note {
   display: flex;
-  margin-top: 1.1rem;
   gap: 0.6rem;
-  max-width: 34rem;
-  font-size: 0.9375rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -459,7 +413,7 @@ a { color: inherit; }
   text-wrap: balance;
   text-shadow: 0 2px 30px rgba(4, 3, 10, 0.5);
 }
-.end__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 2.25rem; }
+.end__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 2rem; margin-top: 2rem; }
 .end__copy {
   margin-top: auto;
   padding: 0 var(--gutter) 1.5rem;
