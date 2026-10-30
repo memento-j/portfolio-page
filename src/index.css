@@ -254,6 +254,44 @@ a { color: inherit; }
 .text-link { font-weight: 600; color: var(--text); text-decoration-color: rgba(140, 123, 255, 0.55); }
 .text-link:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
+/* A small moon leads every action. On LinkedIn and GitHub it's a thin crescent that waxes to a full cyan
+   moon on hover or focus; See My Projects and the project links carry a full moon. The dark side is a
+   mask (a circle cut out of the disc), so the moon reads on any sky behind it. */
+@property --phase { syntax: "<percentage>"; inherits: true; initial-value: 28%; }
+.moon {
+  position: relative;
+  flex: none;
+  width: 11px;
+  height: 11px;
+  margin-right: 0.1rem;
+  border-radius: 50%;
+  border: 1px solid rgba(216, 241, 255, 0.32);
+  --phase: 28%;
+  transition: --phase 700ms var(--ease-out), border-color 300ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.moon::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: var(--ice);
+  -webkit-mask: radial-gradient(circle at var(--phase) 45%, transparent 5.2px, #000 5.8px);
+  mask: radial-gradient(circle at var(--phase) 45%, transparent 5.2px, #000 5.8px);
+  transition: background 300ms var(--ease-out);
+}
+.text-link:is(:hover, :focus-visible) .moon,
+.hero__cta .moon,
+.project__link .moon { --phase: -90%; border-color: transparent; }
+.text-link:is(:hover, :focus-visible) .moon::after,
+.hero__cta .moon::after,
+.project__link .moon::after { background: var(--accent); }
+/* the full moon sets a touch as you head down to Projects */
+.hero__cta:hover .moon { transform: translateY(2px); }
+@media (prefers-reduced-motion: reduce) {
+  .moon, .moon::after { transition: none; }
+  .hero__cta:hover .moon { transform: none; }
+}
+
 /* the clouds fade into the void instead of stopping at the section edge */
 .hero::after {
   content: "";

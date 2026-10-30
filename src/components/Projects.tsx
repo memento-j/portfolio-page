@@ -72,12 +72,14 @@ function ProjectItem({ project, flip }: { project: Project; flip: boolean }) {
                     {project.live && (
                         // the label names the site itself, the way a wall label names a work's location
                         <a className="project__link" href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} ${projectsSection.liveLabel}`}>
+                            <span className="moon" aria-hidden />
                             {project.live.replace(/^https?:\/\//, "")}
                             <ArrowUpRight aria-hidden size={16} strokeWidth={2.25} />
                         </a>
                     )}
                     {project.link && (
                         <a className="project__link" href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} source on ${footer.github}`}>
+                            <span className="moon" aria-hidden />
                             {footer.github}
                             <ArrowUpRight aria-hidden size={16} strokeWidth={2.25} />
                         </a>

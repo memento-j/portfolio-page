@@ -1,6 +1,5 @@
 import { lazy, Suspense, useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { Github, Linkedin } from "lucide-react";
 import { footer, links } from "../lib/content";
 
 const Dawn = lazy(() => import("./three/Dawn"));
@@ -26,11 +25,11 @@ export default function Footer() {
                 <p className="end__signoff">{footer.signoff}</p>
                 <div className="end__links">
                     <a className="text-link" href={links.linkedin} target="_blank" rel="noopener noreferrer">
-                        <Linkedin aria-hidden size={17} strokeWidth={1.9} />
+                        <span className="moon" aria-hidden />
                         {footer.linkedin}
                     </a>
                     <a className="text-link" href={links.github} target="_blank" rel="noopener noreferrer">
-                        <Github aria-hidden size={17} strokeWidth={1.9} />
+                        <span className="moon" aria-hidden />
                         {footer.github}
                     </a>
                 </div>

@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
-import { ArrowDown, Github, Linkedin } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { footer, hero, links } from "../lib/content";
 
 // three.js loads after the page's own content, so the title never waits on it
@@ -165,15 +165,16 @@ export default function Hero() {
                         <p className="hero__sub">{hero.subheading}</p>
                         <div className="hero__actions" ref={actionsRef}>
                             <a className="hero__cta" href="#projects" onClick={toProjects}>
+                                <span className="moon" aria-hidden />
                                 {hero.cta}
                                 <ArrowDown aria-hidden size={18} strokeWidth={2.25} />
                             </a>
                             <a className="text-link" href={links.linkedin} target="_blank" rel="noopener noreferrer">
-                                <Linkedin aria-hidden size={17} strokeWidth={1.9} />
+                                <span className="moon" aria-hidden />
                                 {footer.linkedin}
                             </a>
                             <a className="text-link" href={links.github} target="_blank" rel="noopener noreferrer">
-                                <Github aria-hidden size={17} strokeWidth={1.9} />
+                                <span className="moon" aria-hidden />
                                 {footer.github}
                             </a>
                         </div>
