@@ -41,9 +41,9 @@ export const projects: Project[] = [
         name: "Pondo",
         tagline: "frontend web app",
         live: "https://pondo.games",
-        description: "A daily games web app with new interactive puzzles every day, all generated in Python from real data. Over 1,000 people have played so far.",
+        description: "A daily games web app with new interactive puzzles every day, all generated in Python from real data. Over 2,000 people have played so far.",
         link: "",   // no public repository; the live site is the only link
-        technologies: ["Next.js", "TailwindCSS", "TypeScript", "Cloudflare Deployment"],
+        technologies: ["SpringBoot", "Nginx", "Postgres", "Next.js", "TailwindCSS", "TypeScript", "Cloudflare Deployment"],
     },
     {
         name: "AI Interview Practice Tool",
